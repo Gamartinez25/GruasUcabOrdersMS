@@ -12,5 +12,7 @@ namespace OrdersMS.Core.Repositories
        Task AddTarifaAsync(Tarifa tarifa);
        Task<IEnumerable<Tarifa>> GetAllTarifaAsync();
        Task UptadeTarifaAsync(Tarifa tarifa);
+        Task DeleteTarifaAsync(Guid id);
     }
+
 }
