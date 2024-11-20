@@ -12,7 +12,8 @@ namespace OrdersMS.Application.Mappers.TarifaMappers
             CreateMap<CrearTarifaDto, Tarifa>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid()))
                 .ForMember(dest => dest.Estatus, opt => opt.MapFrom(src => "Activo")); // Asigna "Activo" a Estatus
-
+            CreateMap<ListarTarifaDto, Tarifa>()
+                .ForMember(dest => dest.Estatus, opt => opt.MapFrom(src => "Activo")); // Asigna "Activo" a Estatus;
         }
     }
 }

@@ -45,6 +45,20 @@ namespace GruasUcabOrdersMS.Controllers
                 return StatusCode(500,"Hubo un error al procesar la busqueda");
             }
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateDepartamento(Guid id, [FromBody] ListarTarifaDto tarifaDto)
+        {
+            try
+            {
+                var command = new ModificarTarifaCommand(tarifaDto,id);
+                await Mediator.Send(command);
+                return Ok("Modificación Exitosa");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Ha ocurrido un error al realizar al realizar la modificación");
+            }
+        }
 
     }
 
