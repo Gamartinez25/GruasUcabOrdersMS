@@ -27,5 +27,16 @@ namespace OrdersMS.Infrastructure.Repositories
                 .Where(t => t.Estatus == "Activo")
                 .ToListAsync();
         }
+
+        public  async Task UptadeTarifaAsync(Tarifa tarifa)
+        {
+            var existingTarifa = await OrderMsDbContext.Tarifa.FindAsync(tarifa.Id);
+            if (existingTarifa == null)
+            {
+                throw new KeyNotFoundException("La tarifa no se encontró.");
+            }
+            OrderMsDbContext.Tarifa.Entry(existingTarifa).CurrentValues.SetValues(tarifa);
+            OrderMsDbContext.SaveChangesAsync();
+        }
     }
 }

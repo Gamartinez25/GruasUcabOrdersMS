@@ -46,6 +46,8 @@ namespace OrdersMS.Infrastructure.Database
                         break;
 
                     case EntityState.Modified:
+                        entry.Property(e => e.FechaCreacion).IsModified = false;
+                        entry.Property(e => e.CreadoPor).IsModified = false;
                         entry.Entity.FechaActualizacion = currentDateTime; // Fecha de actualización
                         entry.Entity.ActualizadoPor = "DefaultUser";   // Aquí también puedes obtener el usuario autenticado
                         break;
