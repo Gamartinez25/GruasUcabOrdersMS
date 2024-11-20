@@ -21,6 +21,16 @@ namespace OrdersMS.Infrastructure.Repositories
            await OrderMsDbContext.SaveChangesAsync();
         }
 
+        public async Task DeleteTarifaAsync(Guid id)
+        {
+            var existingTarifa = await OrderMsDbContext.Tarifa.FindAsync(id);
+            if (existingTarifa is null) throw new InvalidOperationException("Tarifa no encontrado");
+
+            existingTarifa.ActualizarEstatus("Inactivo");
+            OrderMsDbContext.Tarifa.Entry(existingTarifa).Property(o => o.Estatus).IsModified = true;
+            await OrderMsDbContext.SaveChangesAsync(); ;
+        }
+
         public async Task<IEnumerable<Tarifa>> GetAllTarifaAsync()
         {
          return await OrderMsDbContext.Tarifa

@@ -17,5 +17,11 @@ namespace OrdersMS.Domain.Entities
 
         // Relación
         public Poliza Poliza { get; private set; }
+
+        
+        public void ActualizarEstatus(string estatus)
+        {
+            Estatus = estatus;
+        }
     }
 }

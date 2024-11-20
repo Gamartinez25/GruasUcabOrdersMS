@@ -46,7 +46,7 @@ namespace GruasUcabOrdersMS.Controllers
             }
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDepartamento(Guid id, [FromBody] ListarTarifaDto tarifaDto)
+        public async Task<IActionResult> UpdateTarifa(Guid id, [FromBody] ListarTarifaDto tarifaDto)
         {
             try
             {
@@ -56,7 +56,21 @@ namespace GruasUcabOrdersMS.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, "Ha ocurrido un error al realizar al realizar la modificación");
+                return StatusCode(500, "Ha ocurrido un error  al realizar la modificación");
+            }
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTarifa(Guid id)
+        {
+            try
+            {
+                var command = new EliminarTarifaCommand(id);
+                await Mediator.Send(command);
+                return Ok("Eliminacion Exitosa");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Ha ocurrido un error al realizar la eliminación");
             }
         }
 
