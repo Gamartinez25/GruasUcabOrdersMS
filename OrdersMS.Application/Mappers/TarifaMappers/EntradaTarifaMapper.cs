@@ -3,11 +3,11 @@ using OrdersMS.Application.Dtos.TarifaDtos;
 using OrdersMS.Domain.Entities;
 
 
-namespace OrdersMS.Application.Mappers
+namespace OrdersMS.Application.Mappers.TarifaMappers
 {
-    public class EntradaTarifaMapper:Profile
+    public class EntradaTarifaMapper : Profile
     {
-        public EntradaTarifaMapper() 
+        public EntradaTarifaMapper()
         {
             CreateMap<CrearTarifaDto, Tarifa>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid()))

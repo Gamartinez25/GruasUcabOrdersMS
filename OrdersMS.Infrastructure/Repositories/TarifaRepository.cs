@@ -1,4 +1,5 @@
-﻿using OrdersMS.Core.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using OrdersMS.Core.Database;
 using OrdersMS.Core.Repositories;
 using OrdersMS.Domain.Entities;
 
@@ -18,6 +19,13 @@ namespace OrdersMS.Infrastructure.Repositories
            await  OrderMsDbContext.Tarifa.AddAsync(tarifa);
            
            await OrderMsDbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Tarifa>> GetAllTarifaAsync()
+        {
+         return await OrderMsDbContext.Tarifa
+                .Where(t => t.Estatus == "Activo")
+                .ToListAsync();
         }
     }
 }

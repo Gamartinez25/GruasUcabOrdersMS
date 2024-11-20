@@ -10,5 +10,6 @@ namespace OrdersMS.Core.Repositories
     public interface ITarifaRepository
     {
        Task AddTarifaAsync(Tarifa tarifa);
+       Task<IEnumerable<Tarifa>> GetAllTarifaAsync();
     }
 }
