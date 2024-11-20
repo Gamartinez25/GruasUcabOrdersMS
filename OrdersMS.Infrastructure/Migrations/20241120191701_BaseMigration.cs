@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OrdersMS.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InicialMigration : Migration
+    public partial class BaseMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,10 +46,14 @@ namespace OrdersMS.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Nombre = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    CostoBase = table.Column<double>(type: "double precision", precision: 10, scale: 2, nullable: false),
-                    DistanciaKm = table.Column<double>(type: "double precision", precision: 10, scale: 2, nullable: false),
-                    CostoPorKm = table.Column<double>(type: "double precision", precision: 10, scale: 2, nullable: false),
-                    Estatus = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
+                    CostoBase = table.Column<decimal>(type: "numeric(12,2)", nullable: false),
+                    DistanciaKm = table.Column<double>(type: "numeric(12,2)", nullable: false),
+                    CostoPorKm = table.Column<double>(type: "numeric(12,2)", nullable: false),
+                    Estatus = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    FechaCreacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreadoPor = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    FechaActualizacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ActualizadoPor = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -120,15 +124,19 @@ namespace OrdersMS.Infrastructure.Migrations
                     Direccion = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     Estatus = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     CantidadKmExtra = table.Column<double>(type: "double precision", nullable: false),
-                    CostoServiciosAdicionales = table.Column<double>(type: "double precision", precision: 12, scale: 2, nullable: false),
-                    CostoTotalKm = table.Column<double>(type: "double precision", precision: 12, scale: 2, nullable: false),
-                    CostoTotal = table.Column<double>(type: "double precision", precision: 12, scale: 2, nullable: false),
+                    CostoServiciosAdicionales = table.Column<double>(type: "numeric(12,2)", nullable: false),
+                    CostoTotalKm = table.Column<double>(type: "numeric(12,2)", nullable: false),
+                    CostoTotal = table.Column<double>(type: "numeric(12,2)", nullable: false),
                     NombreDenunciante = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     TipoDocumentoDenunciante = table.Column<string>(type: "character varying(1)", maxLength: 1, nullable: false),
                     NumeroDocumentoDenunciante = table.Column<string>(type: "character varying(8)", maxLength: 8, nullable: false),
                     PolizaAseguradoId = table.Column<Guid>(type: "uuid", nullable: false),
                     Administrador = table.Column<Guid>(type: "uuid", nullable: false),
-                    Operador = table.Column<Guid>(type: "uuid", nullable: false)
+                    Operador = table.Column<Guid>(type: "uuid", nullable: false),
+                    FechaCreacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreadoPor = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    FechaActualizacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ActualizadoPor = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -147,8 +155,13 @@ namespace OrdersMS.Infrastructure.Migrations
                 {
                     OrdenDeServicioId = table.Column<Guid>(type: "uuid", nullable: false),
                     CostoAdicionalId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Costo = table.Column<double>(type: "double precision", precision: 10, scale: 2, nullable: false),
-                    Estatus = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    Costo = table.Column<double>(type: "numeric(12,2)", nullable: false),
+                    Estatus = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: true),
+                    FechaCreacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreadoPor = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    FechaActualizacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ActualizadoPor = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {

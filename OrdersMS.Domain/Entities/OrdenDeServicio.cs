@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrdersMS.Domain.Entities
 {
-    public class OrdenDeServicio
+    public class OrdenDeServicio:Base
     {
         public Guid Id { get;private set; }
         public DateTime Fecha { get; private    set; }

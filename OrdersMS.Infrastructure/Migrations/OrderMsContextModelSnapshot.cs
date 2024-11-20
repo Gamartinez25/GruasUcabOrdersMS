@@ -86,14 +86,30 @@ namespace OrdersMS.Infrastructure.Migrations
                     b.Property<Guid>("CostoAdicionalId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("ActualizadoPor")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<double>("Costo")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("double precision");
+                        .HasColumnType("numeric(12,2)");
+
+                    b.Property<string>("CreadoPor")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Estatus")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
+
+                    b.Property<DateTime?>("FechaActualizacion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("Id")
+                        .HasColumnType("integer");
 
                     b.HasKey("OrdenDeServicioId", "CostoAdicionalId");
 
@@ -108,6 +124,10 @@ namespace OrdersMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("ActualizadoPor")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<Guid>("Administrador")
                         .HasColumnType("uuid");
 
@@ -115,16 +135,17 @@ namespace OrdersMS.Infrastructure.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<double>("CostoServiciosAdicionales")
-                        .HasPrecision(12, 2)
-                        .HasColumnType("double precision");
+                        .HasColumnType("numeric(12,2)");
 
                     b.Property<double>("CostoTotal")
-                        .HasPrecision(12, 2)
-                        .HasColumnType("double precision");
+                        .HasColumnType("numeric(12,2)");
 
                     b.Property<double>("CostoTotalKm")
-                        .HasPrecision(12, 2)
-                        .HasColumnType("double precision");
+                        .HasColumnType("numeric(12,2)");
+
+                    b.Property<string>("CreadoPor")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("DetallesIncidente")
                         .IsRequired()
@@ -142,6 +163,12 @@ namespace OrdersMS.Infrastructure.Migrations
                         .HasColumnType("character varying(30)");
 
                     b.Property<DateTime>("Fecha")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("FechaActualizacion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NombreDenunciante")
@@ -269,22 +296,33 @@ namespace OrdersMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<double>("CostoBase")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("double precision");
+                    b.Property<string>("ActualizadoPor")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<decimal>("CostoBase")
+                        .HasColumnType("numeric(12,2)");
 
                     b.Property<double>("CostoPorKm")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("double precision");
+                        .HasColumnType("numeric(12,2)");
+
+                    b.Property<string>("CreadoPor")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<double>("DistanciaKm")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("double precision");
+                        .HasColumnType("numeric(12,2)");
 
                     b.Property<string>("Estatus")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
+
+                    b.Property<DateTime?>("FechaActualizacion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
