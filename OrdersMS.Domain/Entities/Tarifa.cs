@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace OrdersMS.Domain.Entities
 {
-    public class Tarifa
+    public class Tarifa:Base
     {
         public Guid Id { get; private set; }
         public string Nombre { get; private set; }
-        public double CostoBase { get;  private set; }
+        public decimal CostoBase { get;  private set; }
         public double DistanciaKm { get;  private set; }
         public double CostoPorKm { get;  private set; }
         public string Estatus { get; private  set; }

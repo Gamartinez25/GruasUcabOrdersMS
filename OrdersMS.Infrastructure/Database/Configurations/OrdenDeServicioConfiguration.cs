@@ -15,14 +15,17 @@ namespace OrdersMS.Infrastructure.Database.Configurations
             builder.Property(o => o.Direccion).IsRequired().HasMaxLength(200);
             builder.Property(o => o.Estatus).IsRequired().HasMaxLength(30);
             builder.Property(o => o.CantidadKmExtra).IsRequired();
-            builder.Property(o => o.CostoServiciosAdicionales).IsRequired().HasPrecision(12, 2);
-            builder.Property(o => o.CostoTotalKm).IsRequired().HasPrecision(12, 2);
-            builder.Property(o => o.CostoTotal).IsRequired().HasPrecision(12, 2);
+            builder.Property(o => o.CostoServiciosAdicionales).IsRequired().HasColumnType("numeric(12,2)");
+            builder.Property(o => o.CostoTotalKm).IsRequired().HasColumnType("numeric(12,2)");
+            builder.Property(o => o.CostoTotal).IsRequired().HasColumnType("numeric(12,2)");
             builder.Property(o => o.NombreDenunciante).IsRequired().HasMaxLength(100);
             builder.Property(o => o.TipoDocumentoDenunciante).IsRequired().HasMaxLength(1);
             builder.Property(o => o.NumeroDocumentoDenunciante).IsRequired().HasMaxLength(8);
+            builder.Property(s => s.CreadoPor).HasDefaultValue(null).HasMaxLength(100);
+            builder.Property(s => s.ActualizadoPor).HasDefaultValue(null).HasMaxLength(100);
+            builder.Property(s => s.FechaCreacion).HasDefaultValue(null);
+            builder.Property(s => s.FechaActualizacion).HasDefaultValue(null);
 
-            
             builder.HasMany(o => o.OrdenCostosAdicionales) // OrdenDeServicio tiene muchas relaciones con CostoAdicional
                    .WithOne(oca => oca.OrdenDeServicio)     // OrdenCostoAdicional tiene una OrdenDeServicio
                    .HasForeignKey(oca => oca.OrdenDeServicioId); // La clave foránea está en la tabla intermedia

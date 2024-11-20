@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrdersMS.Domain.Entities
 {
-    public class OrdenCostoAdicional
+    public class OrdenCostoAdicional:Base
     {
         public Guid OrdenDeServicioId { get; set; }
         public OrdenDeServicio OrdenDeServicio { get; set; }

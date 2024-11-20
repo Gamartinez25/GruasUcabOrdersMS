@@ -10,8 +10,12 @@ namespace OrdersMS.Infrastructure.Database.Configurations
         {
             builder.HasKey(oca => new { oca.OrdenDeServicioId, oca.CostoAdicionalId }); // Clave compuesta
 
-            builder.Property(oca => oca.Costo).IsRequired().HasPrecision(10, 2);
-            builder.Property(oca => oca.Estatus).IsRequired().HasMaxLength(50);
+            builder.Property(s=> s.Costo).IsRequired().HasColumnType("numeric(12,2)");
+            builder.Property(s=> s.Estatus).IsRequired().HasMaxLength(50);
+            builder.Property(s => s.CreadoPor).HasDefaultValue(null).HasMaxLength(100);
+            builder.Property(s => s.ActualizadoPor).HasDefaultValue(null).HasMaxLength(100);
+            builder.Property(s => s.FechaCreacion).HasDefaultValue(null);
+            builder.Property(s => s.FechaActualizacion).HasDefaultValue(null);
 
             builder.HasOne(oca => oca.OrdenDeServicio) // OrdenCostoAdicional tiene una OrdenDeServicio
                    .WithMany(o => o.OrdenCostosAdicionales)  // OrdenDeServicio tiene muchas relaciones con CostoAdicional

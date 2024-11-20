@@ -19,5 +19,7 @@ namespace OrdersMS.Core.Database
         DbSet<PolizaAsegurado> PolizaAsegurado { get; set; }
         DbSet<Tarifa> Tarifa { get; set; }
 
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+        
     }
 }

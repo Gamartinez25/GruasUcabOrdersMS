@@ -29,5 +29,31 @@ namespace OrdersMS.Infrastructure.Database
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            // Obtener la fecha y hora actual
+            var currentDateTime = DateTime.UtcNow;
+
+            // Iterar a través de las entidades rastreadas por el ChangeTracker
+            foreach (var entry in ChangeTracker.Entries<Base>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.FechaCreacion = currentDateTime; // Fecha de creación
+                        entry.Entity.CreadoPor = "DefaultUser";   // Aquí puedes obtener el usuario autenticado
+                        break;
+
+                    case EntityState.Modified:
+                        entry.Entity.FechaActualizacion = currentDateTime; // Fecha de actualización
+                        entry.Entity.ActualizadoPor = "DefaultUser";   // Aquí también puedes obtener el usuario autenticado
+                        break;
+                }
+            }
+
+            // Llamar al método base para guardar los cambios en la base de datos
+            return await base.SaveChangesAsync(cancellationToken);
+        }
     }
 }
