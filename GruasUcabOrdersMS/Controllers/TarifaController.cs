@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OrdersMS.Application.Commands.TarifaCommands;
+using OrdersMS.Application.Querys;
 using OrdersMS.Application.Dtos.TarifaDtos;
 
 namespace GruasUcabOrdersMS.Controllers
@@ -30,6 +31,21 @@ namespace GruasUcabOrdersMS.Controllers
                 return StatusCode(500,"Hubo un error al procesar el registro");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAllTarifas()
+        {
+            try
+            {
+                var query = new ListarTarifasQuery();
+                var tarifas = await Mediator.Send(query);
+                return Ok(tarifas);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500,"Hubo un error al procesar la busqueda");
+            }
+        }
+
     }
-   
+
 }
