@@ -1,4 +1,5 @@
-﻿using OrdersMS.Core.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using OrdersMS.Core.Database;
 using OrdersMS.Core.Repositories;
 using OrdersMS.Domain.Entities;
 using System;
@@ -22,6 +23,26 @@ namespace OrdersMS.Infrastructure.Repositories
             await OrderMsDbContext.OrdenDeServicio.AddAsync(orden);
 
             await OrderMsDbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Asegurado>> GetAllAseguradoAsync()
+        {
+            return await OrderMsDbContext.Asegurado.ToListAsync();
+        }
+
+        public  async Task<IEnumerable<OrdenDeServicio>> GetAllOrdenAsync()
+        {
+            return await OrderMsDbContext.OrdenDeServicio.ToListAsync();
+        }
+
+        public async Task<IEnumerable<PolizaAsegurado>> GetAllPolizaAseguradoAsync()
+        {
+            return await OrderMsDbContext.PolizaAsegurado.ToListAsync();
+        }
+
+        public  async Task<IEnumerable<Poliza>> GetAllPolizaAsync()
+        {
+            return await OrderMsDbContext.Poliza.ToListAsync();
         }
     }
 }

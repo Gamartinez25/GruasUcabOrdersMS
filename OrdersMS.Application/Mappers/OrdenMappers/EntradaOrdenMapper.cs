@@ -16,10 +16,8 @@ namespace OrdersMS.Application.Mappers.OrdenMappers
             CreateMap<CrearOrdenDto, OrdenDeServicio>()
                  .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid()))
                  .ForMember(dest => dest.Fecha, opt => opt.MapFrom(src => DateTime.UtcNow))
-                 .ForMember(dest => dest.Estatus, opt => opt.MapFrom(src => "Activo"))
-                 //.ForMember(dest => dest.CostoTotal, opt => opt.MapFrom(src => 0))
+                 .ForMember(dest => dest.Estatus, opt => opt.MapFrom(src => "Por Asignar"))
                  .ForMember(dest => dest.CostoServiciosAdicionales, opt => opt.MapFrom(src => 0));
-                 //.ForMember(dest => dest.CostoTotalKmExtra, opt => opt.MapFrom(src => 0));
                  
         }
     }

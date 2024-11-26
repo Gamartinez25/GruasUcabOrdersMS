@@ -21,7 +21,9 @@ namespace OrdersMS.Application.Handlers.TarifaHandlers
         {
 
             var tarifas = await TarifaRepository.GetAllTarifaAsync();
-            var tarifasDto = Mapper.Map<IEnumerable<ListarTarifaDto>>(tarifas);
+            var tarifasActivas = tarifas.Where(x => x.Estatus == "Activo");
+            var tarifasDto = Mapper.Map<IEnumerable<ListarTarifaDto>>(tarifasActivas);
+            
             return tarifasDto;
         }
         

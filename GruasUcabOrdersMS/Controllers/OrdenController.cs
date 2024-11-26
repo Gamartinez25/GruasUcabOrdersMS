@@ -4,6 +4,7 @@ using OrdersMS.Application.Commands.OrdenCommands;
 using OrdersMS.Application.Commands.TarifaCommands;
 using OrdersMS.Application.Dtos.OrdenDtos;
 using OrdersMS.Application.Dtos.TarifaDtos;
+using OrdersMS.Application.Querys;
 
 namespace GruasUcabOrdersMS.Controllers
 {
@@ -31,6 +32,20 @@ namespace GruasUcabOrdersMS.Controllers
             catch (Exception e)
             {
                 return StatusCode(500, "Ha ocurrido un error al procesar el registro");
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllOrdenes()
+        {
+            try
+            {
+                var query = new ListarOrdenesQuery();
+                var ordenes = await Mediator.Send(query);
+                return Ok(ordenes);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Hubo un error al procesar la busqueda");
             }
         }
     }
