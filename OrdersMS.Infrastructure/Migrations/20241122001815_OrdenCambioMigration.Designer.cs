@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OrdersMS.Infrastructure.Database;
@@ -11,9 +12,11 @@ using OrdersMS.Infrastructure.Database;
 namespace OrdersMS.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderMsContext))]
-    partial class OrderMsContextModelSnapshot : ModelSnapshot
+    [Migration("20241122001815_OrdenCambioMigration")]
+    partial class OrdenCambioMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,12 +155,7 @@ namespace OrdersMS.Infrastructure.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("character varying(300)");
 
-                    b.Property<string>("DireccionDestino")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
-                    b.Property<string>("DireccionOrigen")
+                    b.Property<string>("Direccion")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
@@ -197,7 +195,7 @@ namespace OrdersMS.Infrastructure.Migrations
                         .HasMaxLength(1)
                         .HasColumnType("character varying(1)");
 
-                    b.Property<Guid?>("Vehiculo")
+                    b.Property<Guid>("Vehiculo")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
@@ -210,7 +208,6 @@ namespace OrdersMS.Infrastructure.Migrations
             modelBuilder.Entity("OrdersMS.Domain.Entities.Poliza", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<double>("Costo")
@@ -227,13 +224,7 @@ namespace OrdersMS.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<Guid>("TarifaId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TarifaId")
-                        .IsUnique();
 
                     b.ToTable("Poliza");
                 });
@@ -383,7 +374,7 @@ namespace OrdersMS.Infrastructure.Migrations
                 {
                     b.HasOne("OrdersMS.Domain.Entities.Tarifa", "Tarifa")
                         .WithOne("Poliza")
-                        .HasForeignKey("OrdersMS.Domain.Entities.Poliza", "TarifaId")
+                        .HasForeignKey("OrdersMS.Domain.Entities.Poliza", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

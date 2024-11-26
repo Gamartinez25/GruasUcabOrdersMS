@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OrdersMS.Infrastructure.Database;
@@ -11,9 +12,11 @@ using OrdersMS.Infrastructure.Database;
 namespace OrdersMS.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderMsContext))]
-    partial class OrderMsContextModelSnapshot : ModelSnapshot
+    [Migration("20241122025119_OrdenCambio3Migration")]
+    partial class OrdenCambio3Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,12 +155,7 @@ namespace OrdersMS.Infrastructure.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("character varying(300)");
 
-                    b.Property<string>("DireccionDestino")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
-                    b.Property<string>("DireccionOrigen")
+                    b.Property<string>("Direccion")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
