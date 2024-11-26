@@ -15,6 +15,7 @@ namespace OrdersMS.Domain.Entities
 
         // Relaciones
         public Tarifa Tarifa { get; private  set; }
+        public Guid TarifaId { get; private set; }
         public PolizaAsegurado PolizaAsegurado { get; set; }
     }
 }

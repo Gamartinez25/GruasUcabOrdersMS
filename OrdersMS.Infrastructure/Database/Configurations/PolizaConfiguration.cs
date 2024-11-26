@@ -15,7 +15,7 @@ namespace OrdersMS.Infrastructure.Database.Configurations
             builder.Property(s => s.Descripcion).IsRequired().HasMaxLength(50);
             builder.HasOne(p => p.Tarifa)  // Poliza tiene una Tarifa
                .WithOne(t => t.Poliza) // Tarifa tiene una Poliza
-               .HasForeignKey<Poliza>(p => p.Id);
+               .HasForeignKey<Poliza>(p => p.TarifaId);
 
             builder.HasOne(p => p.PolizaAsegurado)
              .WithOne(pa => pa.Poliza)
