@@ -33,9 +33,7 @@ namespace OrdersMS.Infrastructure.Repositories
 
         public async Task<IEnumerable<Tarifa>> GetAllTarifaAsync()
         {
-         return await OrderMsDbContext.Tarifa
-                .Where(t => t.Estatus == "Activo")
-                .ToListAsync();
+         return await OrderMsDbContext.Tarifa.ToListAsync();
         }
 
         public  async Task UptadeTarifaAsync(Tarifa tarifa)

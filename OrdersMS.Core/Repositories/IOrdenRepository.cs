@@ -10,5 +10,9 @@ namespace OrdersMS.Core.Repositories
     public interface IOrdenRepository
     {
         Task AddOrdenAsync(OrdenDeServicio orden);
+        Task<IEnumerable<OrdenDeServicio>> GetAllOrdenAsync();
+        Task<IEnumerable<PolizaAsegurado>> GetAllPolizaAseguradoAsync();
+        Task<IEnumerable<Asegurado>> GetAllAseguradoAsync();
+        Task<IEnumerable<Poliza>> GetAllPolizaAsync();
     }
 }
