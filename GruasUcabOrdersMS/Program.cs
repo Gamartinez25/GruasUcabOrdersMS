@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IOrderMsDbContext, OrderMsContext>();
 builder.Services.AddTransient<ITarifaRepository, TarifaRepository>();
 builder.Services.AddTransient<IOrdenRepository, OrdenRepository>();
-builder.Services.AddTransient<IOrdenMapper, SalidaOrdenMapper>();
+builder.Services.AddTransient<IOrdenMapper, OrdenMapper>();
 var dbConnectionString = builder.Configuration.GetValue<string>("DBConnectionString");
 builder.Services.AddDbContext<OrderMsContext>(options => options.UseNpgsql(dbConnectionString));
 builder.Services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(applicationAssembly));

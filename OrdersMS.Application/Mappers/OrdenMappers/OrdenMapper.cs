@@ -4,7 +4,7 @@ using OrdersMS.Domain.Entities;
 
 namespace OrdersMS.Application.Mappers.OrdenMappers
 {
-    public class SalidaOrdenMapper : IOrdenMapper
+    public class OrdenMapper : IOrdenMapper
     {
         public IEnumerable<ListarOrdenesDto> ListarOrdenesDtos(IEnumerable<OrdenDeServicio> ordenes, IEnumerable<PolizaAsegurado> polizaAsegurados, IEnumerable<Poliza> polizas, IEnumerable<Asegurado> asegurados, IEnumerable<Tarifa> tarifas)
         {
@@ -57,6 +57,15 @@ namespace OrdersMS.Application.Mappers.OrdenMappers
                 ordenesDto.Add(ordenDto);
             }
             return ordenesDto;
+        }
+
+        public OrdenDeServicio ModificarOrden(OrdenDeServicio orden, ModificarOrdenDto ordenDto)
+        {
+            var nuevaOrden = new OrdenDeServicio(orden.Id, orden.Fecha, orden.DetallesIncidente, orden.DireccionOrigen,
+                orden.DireccionDestino, orden.Estatus, ordenDto.CostoTotal, orden.NombreDenunciante, orden.TipoDocumentoDenunciante,
+                orden.NumeroDocumentoDenunciante, orden.PolizaAseguradoId, orden.Administrador, orden.Operador,
+                ordenDto.Vehiculo, ordenDto.CantidadKmExtra, orden.CostoServiciosAdicionales, ordenDto.CostoTotalKmExtra);
+            return nuevaOrden;
         }
     }
 }

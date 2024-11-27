@@ -30,6 +30,44 @@ namespace OrdersMS.Domain.Entities
         public Guid? Operador { get; private set; }
         public Guid? Vehiculo {  get; private set; }
         public ICollection<OrdenCostoAdicional>? OrdenCostosAdicionales { get; private set; }
-        
+        public OrdenDeServicio(Guid id,
+                               DateTime fecha,
+                               string detallesIncidente,
+                               string direccionOrigen,
+                               string direccionDestino,
+                               string estatus,
+                               double costoTotal,
+                               string nombreDenunciante,
+                               string tipoDocumentoDenunciante,
+                               string numeroDocumentoDenunciante,
+                               Guid polizaAseguradoId,
+                               Guid? administrador = null,
+                               Guid? operador = null,
+                               Guid? vehiculo = null,
+                               double? cantidadKmExtra = null,
+                               double? costoServiciosAdicionales = null,
+                               double? costoTotalKmExtra = null)
+        {
+            Id = id;
+            Fecha = fecha;
+            DetallesIncidente = detallesIncidente;
+            DireccionOrigen = direccionOrigen;
+            DireccionDestino = direccionDestino;
+            Estatus = estatus;
+            CantidadKmExtra = cantidadKmExtra;
+            CostoServiciosAdicionales = costoServiciosAdicionales;
+            CostoTotalKmExtra = costoTotalKmExtra;
+            CostoTotal = costoTotal;
+            NombreDenunciante = nombreDenunciante;
+            TipoDocumentoDenunciante = tipoDocumentoDenunciante;
+            NumeroDocumentoDenunciante = numeroDocumentoDenunciante;
+            PolizaAseguradoId = polizaAseguradoId;
+            Administrador = administrador;
+            Operador = operador;
+            Vehiculo = vehiculo;
+           
+        }
+
     }
+
 }

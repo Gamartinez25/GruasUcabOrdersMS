@@ -2,11 +2,7 @@
 using OrdersMS.Core.Database;
 using OrdersMS.Core.Repositories;
 using OrdersMS.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace OrdersMS.Infrastructure.Repositories
 {
@@ -43,6 +39,20 @@ namespace OrdersMS.Infrastructure.Repositories
         public  async Task<IEnumerable<Poliza>> GetAllPolizaAsync()
         {
             return await OrderMsDbContext.Poliza.ToListAsync();
+        }
+
+        public async Task<OrdenDeServicio> GetOrdenDeServicioByIdAsync(Guid id)
+        {
+            var existingOrden = await OrderMsDbContext.OrdenDeServicio.FindAsync(id);
+            if (existingOrden is null) throw new InvalidOperationException("Orden no encontrada");
+            return existingOrden;
+        }
+
+        public async Task UpdateOrdenAsync(OrdenDeServicio orden)
+        {
+           var existingOrden = await OrderMsDbContext.OrdenDeServicio.FindAsync(orden.Id);
+           OrderMsDbContext.OrdenDeServicio.Entry(existingOrden).CurrentValues.SetValues(orden);
+           await OrderMsDbContext.SaveChangesAsync();
         }
     }
 }
