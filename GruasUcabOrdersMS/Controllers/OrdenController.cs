@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OrdersMS.Application.Commands.OrdenCommands;
-using OrdersMS.Application.Commands.TarifaCommands;
 using OrdersMS.Application.Dtos.OrdenDtos;
-using OrdersMS.Application.Dtos.TarifaDtos;
 using OrdersMS.Application.Querys;
 
 namespace GruasUcabOrdersMS.Controllers
@@ -46,6 +44,20 @@ namespace GruasUcabOrdersMS.Controllers
             catch (Exception e)
             {
                 return StatusCode(500, "Hubo un error al procesar la busqueda");
+            }
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateOrden(Guid id, [FromBody] ModificarOrdenDto ordenDto)
+        {
+            try
+            {
+                var command = new ModificarOrdenCommand(ordenDto, id);
+                await Mediator.Send(command);
+                return Ok("Modificación Exitosa");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Ha ocurrido un error  al realizar la modificación");
             }
         }
     }

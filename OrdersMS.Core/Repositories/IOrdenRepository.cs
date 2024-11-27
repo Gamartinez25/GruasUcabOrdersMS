@@ -1,9 +1,5 @@
 ﻿using OrdersMS.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace OrdersMS.Core.Repositories
 {
@@ -14,5 +10,7 @@ namespace OrdersMS.Core.Repositories
         Task<IEnumerable<PolizaAsegurado>> GetAllPolizaAseguradoAsync();
         Task<IEnumerable<Asegurado>> GetAllAseguradoAsync();
         Task<IEnumerable<Poliza>> GetAllPolizaAsync();
+        Task<OrdenDeServicio> GetOrdenDeServicioByIdAsync(Guid id);
+        Task UpdateOrdenAsync(OrdenDeServicio orden);
     }
 }
