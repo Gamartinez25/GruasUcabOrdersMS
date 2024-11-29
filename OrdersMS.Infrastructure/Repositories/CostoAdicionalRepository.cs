@@ -1,4 +1,5 @@
-﻿using OrdersMS.Core.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using OrdersMS.Core.Database;
 using OrdersMS.Core.Repositories;
 using OrdersMS.Domain.Entities;
 using System;
@@ -21,6 +22,25 @@ namespace OrdersMS.Infrastructure.Repositories
         {
             await OrderMsDbContext.OrdenCostoAdicional.AddAsync(costoAdicional);
             await OrderMsDbContext.SaveChangesAsync();
+        }
+
+        public  async Task<IEnumerable<OrdenCostoAdicional>> GetAllCostoAdicionalAsync(Guid idOrden)
+        {
+            return await OrderMsDbContext.OrdenCostoAdicional.Where(x=>x.OrdenDeServicioId == idOrden).ToListAsync();
+
+        }
+        public async Task<IEnumerable<Tuple<Guid, string>>> ObtenerNombresCostosAdicionalesPorId(Guid idOrden)
+        {
+                var nombresCostosAdicionales = await OrderMsDbContext.OrdenCostoAdicional
+                    .Where(oca => oca.OrdenDeServicioId == idOrden) // Filtrar por idOrden
+                    .Select(oca => new Tuple<Guid, string>(
+                        oca.CostoAdicional.Id,    // Obtener el ID del CostoAdicional
+                        oca.CostoAdicional.Nombre // Obtener el Nombre del CostoAdicional
+                    ))
+                    .ToListAsync(); // Convertir a lista
+
+                return nombresCostosAdicionales;
+            
         }
     }
 }
