@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OrdersMS.Application.Commands.CostoAdicionalCommands;
 using OrdersMS.Application.Dtos.CostoAdicionalDtos;
+using OrdersMS.Application.Querys;
 
 namespace GruasUcabOrdersMS.Controllers
 {
@@ -25,7 +26,21 @@ namespace GruasUcabOrdersMS.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500,"Ha ocurrido un error al procesar el registro");
+                return StatusCode(500, "Ha ocurrido un error al procesar el registro");
+            }
+        }
+        [HttpGet("{idOrden}")]
+        public async Task<IActionResult> GetAllCostoAdicionales(Guid idOrden)
+        {
+            try
+            {
+                var query = new ListarCostoAdicionalPorOrdenQuery(idOrden);
+                var costosAdicionales = await Mediator.Send(query);
+                return Ok(costosAdicionales);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500,"Hubo un error al procesar la busqueda");
             }
         }
     }
