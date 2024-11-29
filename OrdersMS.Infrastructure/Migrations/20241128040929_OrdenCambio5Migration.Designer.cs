@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OrdersMS.Infrastructure.Database;
@@ -11,9 +12,11 @@ using OrdersMS.Infrastructure.Database;
 namespace OrdersMS.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderMsContext))]
-    partial class OrderMsContextModelSnapshot : ModelSnapshot
+    [Migration("20241128040929_OrdenCambio5Migration")]
+    partial class OrdenCambio5Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

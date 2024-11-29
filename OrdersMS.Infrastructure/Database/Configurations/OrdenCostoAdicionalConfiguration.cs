@@ -8,10 +8,12 @@ namespace OrdersMS.Infrastructure.Database.Configurations
     {
         public void Configure(EntityTypeBuilder<OrdenCostoAdicional> builder)
         {
-            builder.HasKey(oca => new { oca.OrdenDeServicioId, oca.CostoAdicionalId }); // Clave compuesta
+            builder.HasKey(oca => new { oca.OrdenDeServicioId, oca.CostoAdicionalId,oca.IdCostoOrden }); // Clave compuesta
 
             builder.Property(s=> s.Costo).IsRequired().HasColumnType("numeric(12,2)");
             builder.Property(s=> s.Estatus).IsRequired().HasMaxLength(50);
+            builder.Property(s => s.Descripcion).IsRequired().HasMaxLength(100);
+
             builder.Property(s => s.CreadoPor).HasDefaultValue(null).HasMaxLength(100);
             builder.Property(s => s.ActualizadoPor).HasDefaultValue(null).HasMaxLength(100);
             builder.Property(s => s.FechaCreacion).HasDefaultValue(null);

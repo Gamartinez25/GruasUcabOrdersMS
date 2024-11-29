@@ -9,6 +9,8 @@ using System.Reflection;
 using OrdersMS.Application.Validators.TarifaValidators;
 using OrdersMS.Application.Mappers.TarifaMappers;
 using OrdersMS.Application.Mappers.OrdenMappers;
+using OrdersMS.Application.Mappers.CostoAdicionalMappers;
+using OrdersMS.Application.Validators.CostoAdicionalValidators;
 
 var builder = WebApplication.CreateBuilder(args);
 var applicationAssembly = Assembly.Load("OrdersMS.Application");
@@ -21,6 +23,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IOrderMsDbContext, OrderMsContext>();
 builder.Services.AddTransient<ITarifaRepository, TarifaRepository>();
 builder.Services.AddTransient<IOrdenRepository, OrdenRepository>();
+builder.Services.AddTransient<ICostoAdicionalRepository, CostoAdicionalRepository>();
 builder.Services.AddTransient<IOrdenMapper, OrdenMapper>();
 var dbConnectionString = builder.Configuration.GetValue<string>("DBConnectionString");
 builder.Services.AddDbContext<OrderMsContext>(options => options.UseNpgsql(dbConnectionString));
@@ -28,8 +31,12 @@ builder.Services.AddMediatR(configuration => configuration.RegisterServicesFromA
 builder.Services.AddAutoMapper(typeof(EntradaTarifaMapper));
 builder.Services.AddAutoMapper(typeof(SalidaTarifaMapper));
 builder.Services.AddAutoMapper(typeof(EntradaOrdenMapper));
+builder.Services.AddAutoMapper(typeof(EntradaCostosAdicionalesMapper));
+
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<CrearTarifaValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CostoAdicionalValidator>();
+
 
 
 var app = builder.Build();

@@ -8,6 +8,7 @@ namespace OrdersMS.Domain.Entities
 {
     public class OrdenCostoAdicional:Base
     {
+        public Guid IdCostoOrden {  get; set; }
         public Guid OrdenDeServicioId { get; set; }
         public OrdenDeServicio OrdenDeServicio { get; set; }
 
@@ -17,5 +18,8 @@ namespace OrdersMS.Domain.Entities
         // Atributos adicionales en la relación
         public double Costo { get; set; }
         public string Estatus { get; set; } // Nuevo atributo
+        public string? Descripcion { get; set; } // Nuevo atributo
+
+
     }
 }
