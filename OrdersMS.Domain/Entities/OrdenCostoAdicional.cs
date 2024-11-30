@@ -39,6 +39,10 @@ namespace OrdersMS.Domain.Entities
         public double Costo { get; set; }
         public string Estatus { get; set; } // Nuevo atributo
         public string? Descripcion { get; set; } // Nuevo atributo
+        public void ActualizarEstatus(string estatus) 
+        { 
+            Estatus = estatus;
+        }
 
 
     }

@@ -19,6 +19,8 @@ namespace OrdersMS.Infrastructure.Repositories
             await OrderMsDbContext.SaveChangesAsync();
         }
 
+        
+
         public  async Task<IEnumerable<OrdenCostoAdicional>> GetAllCostoAdicionalAsync(Guid idOrden)
         {
             return await OrderMsDbContext.OrdenCostoAdicional.Where(x=>x.OrdenDeServicioId == idOrden).ToListAsync();
@@ -51,6 +53,13 @@ namespace OrdersMS.Infrastructure.Repositories
             var existingCostoAdicional = GetCostoAdicionalByIdAsync(costoAdicional.IdCostoOrden);
             OrderMsDbContext.OrdenCostoAdicional.Entry(existingCostoAdicional.Result).CurrentValues.SetValues(costoAdicional);
             await OrderMsDbContext.SaveChangesAsync();
+        }
+        public async Task DeleteCostoAdicional(Guid id)
+        {
+            var existingCostoAdicional = await GetCostoAdicionalByIdAsync(id);
+            existingCostoAdicional.ActualizarEstatus("Inactivo");
+            OrderMsDbContext.OrdenCostoAdicional.Entry(existingCostoAdicional).Property(o => o.Estatus).IsModified = true;
+            await OrderMsDbContext.SaveChangesAsync(); ;
         }
     }
 }
