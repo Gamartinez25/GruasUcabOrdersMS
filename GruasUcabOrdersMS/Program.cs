@@ -26,6 +26,8 @@ builder.Services.AddTransient<IOrdenRepository, OrdenRepository>();
 builder.Services.AddTransient<ICostoAdicionalRepository, CostoAdicionalRepository>();
 builder.Services.AddTransient<IOrdenMapper, OrdenMapper>();
 builder.Services.AddTransient<ISalidaCostoAdicionalMapper, SalidaCostoAdicionalMapper>();
+
+
 var dbConnectionString = builder.Configuration.GetValue<string>("DBConnectionString");
 builder.Services.AddDbContext<OrderMsContext>(options => options.UseNpgsql(dbConnectionString));
 builder.Services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(applicationAssembly));

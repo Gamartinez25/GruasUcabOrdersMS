@@ -8,6 +8,24 @@ namespace OrdersMS.Domain.Entities
 {
     public class Base
     {
+        public Base()
+        {
+        }
+
+        public Base(int? id,
+                    DateTime fechaCreacion,
+                    string? creadoPor,
+                    DateTime? fechaActualizacion,
+                    string? actualizadoPor)
+        {
+            Id = id;
+            FechaCreacion = fechaCreacion;
+            CreadoPor = creadoPor;
+            FechaActualizacion = fechaActualizacion;
+            ActualizadoPor = actualizadoPor;
+        }
+       
+
         public int? Id { get; set; }
         public  DateTime FechaCreacion  { get; set; }
         public string? CreadoPor { get; set; }

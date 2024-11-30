@@ -2,11 +2,6 @@
 using OrdersMS.Core.Database;
 using OrdersMS.Core.Repositories;
 using OrdersMS.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrdersMS.Infrastructure.Repositories
 {
@@ -29,7 +24,7 @@ namespace OrdersMS.Infrastructure.Repositories
             return await OrderMsDbContext.OrdenCostoAdicional.Where(x=>x.OrdenDeServicioId == idOrden).ToListAsync();
 
         }
-        public async Task<IEnumerable<Tuple<Guid, string>>> ObtenerNombresCostosAdicionalesPorId(Guid idOrden)
+        public async Task<IEnumerable<Tuple<Guid, string>>> GetAllNombresCostosAdicionalesByIdAsync(Guid idOrden)
         {
                 var nombresCostosAdicionales = await OrderMsDbContext.OrdenCostoAdicional
                     .Where(oca => oca.OrdenDeServicioId == idOrden) // Filtrar por idOrden
@@ -41,6 +36,21 @@ namespace OrdersMS.Infrastructure.Repositories
 
                 return nombresCostosAdicionales;
             
+        }
+
+        public async Task<OrdenCostoAdicional> GetCostoAdicionalByIdAsync(Guid id)
+        {
+           var  existingCostoAdicional= await OrderMsDbContext.OrdenCostoAdicional.FirstOrDefaultAsync(x=>x.IdCostoOrden==id);
+            if (existingCostoAdicional is null) throw new InvalidOperationException("Orden costo adicional no encontrado");
+
+            return existingCostoAdicional;
+        }
+
+        public async Task UpdateCostoAdicional(OrdenCostoAdicional costoAdicional)
+        {
+            var existingCostoAdicional = GetCostoAdicionalByIdAsync(costoAdicional.IdCostoOrden);
+            OrderMsDbContext.OrdenCostoAdicional.Entry(existingCostoAdicional.Result).CurrentValues.SetValues(costoAdicional);
+            await OrderMsDbContext.SaveChangesAsync();
         }
     }
 }
