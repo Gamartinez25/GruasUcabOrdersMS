@@ -11,5 +11,6 @@ namespace OrdersMS.Core.Repositories
    
         Task UpdateCostoAdicional(OrdenCostoAdicional costoAdicional);
         Task<OrdenCostoAdicional> GetCostoAdicionalByIdAsync(Guid id);
+        Task DeleteCostoAdicional(Guid id);
     }
 }

@@ -28,7 +28,7 @@ namespace OrdersMS.Infrastructure.Repositories
 
             existingTarifa.ActualizarEstatus("Inactivo");
             OrderMsDbContext.Tarifa.Entry(existingTarifa).Property(o => o.Estatus).IsModified = true;
-            await OrderMsDbContext.SaveChangesAsync(); ;
+            await OrderMsDbContext.SaveChangesAsync(); 
         }
 
         public async Task<IEnumerable<Tarifa>> GetAllTarifaAsync()

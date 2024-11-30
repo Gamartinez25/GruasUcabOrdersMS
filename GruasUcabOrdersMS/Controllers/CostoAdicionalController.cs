@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OrdersMS.Application.Commands.CostoAdicionalCommands;
+using OrdersMS.Application.Commands.TarifaCommands;
 using OrdersMS.Application.Dtos.CostoAdicionalDtos;
 using OrdersMS.Application.Querys;
 
@@ -55,6 +56,20 @@ namespace GruasUcabOrdersMS.Controllers
             catch (Exception e)
             {
                 return StatusCode(500, e.Message+"Ha ocurrido un error  al realizar la modificación");
+            }
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCostoAdicional(Guid id)
+        {
+            try
+            {
+                var command = new EliminarCostoAdicionalCommand(id);
+                await Mediator.Send(command);
+                return Ok("Eliminacion Exitosa");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Ha ocurrido un error al realizar la eliminación");
             }
         }
     }
