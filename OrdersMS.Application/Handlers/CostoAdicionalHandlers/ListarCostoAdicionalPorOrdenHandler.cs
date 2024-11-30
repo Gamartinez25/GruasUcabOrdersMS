@@ -28,7 +28,7 @@ namespace OrdersMS.Application.Handlers.CostoAdicionalHandlers
         {
 
             var costosOrden = await CostoAdicionalRepository.GetAllCostoAdicionalAsync(request.Id);
-            var nombresCostosAdicionales = await CostoAdicionalRepository.ObtenerNombresCostosAdicionalesPorId(request.Id);
+            var nombresCostosAdicionales = await CostoAdicionalRepository.GetAllNombresCostosAdicionalesByIdAsync(request.Id);
             var ordenCostosDto= Mapper.Map(costosOrden, nombresCostosAdicionales);
             return ordenCostosDto;
         }

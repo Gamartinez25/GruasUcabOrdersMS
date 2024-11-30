@@ -8,6 +8,26 @@ namespace OrdersMS.Domain.Entities
 {
     public class OrdenCostoAdicional:Base
     {
+        public OrdenCostoAdicional(Guid idCostoOrden,
+                                   Guid ordenDeServicioId,
+                                   Guid costoAdicionalId,
+                                   double costo,
+                                   string estatus,
+                                   string descripcion,
+                                   int? Id,
+                                   DateTime fechaCreacion,
+                                   string? creadoPor,
+                                   DateTime? fechaActualizacion,
+                                   string? actualizadoPor):base(Id,fechaCreacion,creadoPor,fechaActualizacion, actualizadoPor)
+        {
+            IdCostoOrden = idCostoOrden;
+            OrdenDeServicioId = ordenDeServicioId;
+            CostoAdicionalId = costoAdicionalId;
+            Costo = costo;
+            Estatus = estatus;
+            Descripcion = descripcion;
+        }
+
         public Guid IdCostoOrden {  get; set; }
         public Guid OrdenDeServicioId { get; set; }
         public OrdenDeServicio OrdenDeServicio { get; set; }
