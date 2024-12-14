@@ -6,6 +6,27 @@ namespace OrdersMS.Application.Mappers.OrdenMappers
 {
     public class OrdenMapper : IOrdenMapper
     {
+        public InformacionPolizaDto ConsultarInformacionPoliza(Guid id, IEnumerable<PolizaAsegurado> polizaAsegurados, IEnumerable<Poliza> polizas, IEnumerable<Asegurado> asegurados, IEnumerable<Tarifa> tarifas)
+        {
+            var polizaAseguradosDiccionario = polizaAsegurados.ToDictionary(a => a.Id);
+            var aseguradosDiccionario = asegurados.ToDictionary(a => a.Id);
+            var polizasDiccionario = polizas.ToDictionary(a => a.Id);
+            var tarifasDiccionario = tarifas.ToDictionary(a => a.Id);
+            var polizaAsegurado = polizaAseguradosDiccionario[id];
+            var poliza = polizasDiccionario[polizaAsegurado.PolizaId];
+            var tarifa = tarifasDiccionario[poliza.TarifaId];
+            var asegurado = aseguradosDiccionario[polizaAsegurado.AseguradoId];
+            var informacion = new InformacionPolizaDto(
+                id, asegurado.Nombres + ' ' + asegurado.Apellidos,
+                asegurado.TipoDocumento + '-' + asegurado.NumeroDocumento,
+                tarifa.CostoBase,
+                tarifa.DistanciaKm,
+                poliza.Nombre,
+                polizaAsegurado.Placa,
+                polizaAsegurado.Marca+ ", " +polizaAsegurado.Modelo + ", "+polizaAsegurado.Color);
+            return informacion;
+        }
+
         public IEnumerable<ListarOrdenesDto> ListarOrdenesDtos(IEnumerable<OrdenDeServicio> ordenes, IEnumerable<PolizaAsegurado> polizaAsegurados, IEnumerable<Poliza> polizas, IEnumerable<Asegurado> asegurados, IEnumerable<Tarifa> tarifas)
         {
             var polizaAseguradosDiccionario = polizaAsegurados.ToDictionary(a => a.Id);

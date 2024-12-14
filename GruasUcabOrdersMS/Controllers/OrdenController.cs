@@ -29,7 +29,7 @@ namespace GruasUcabOrdersMS.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, "Ha ocurrido un error al procesar el registro");
+                return StatusCode(500, e.Message);
             }
         }
         [HttpGet]
@@ -58,6 +58,34 @@ namespace GruasUcabOrdersMS.Controllers
             catch (Exception e)
             {
                 return StatusCode(500, "Ha ocurrido un error  al realizar la modificación");
+            }
+        }
+        [HttpPut("/status/{idOrden}")]
+        public async Task<IActionResult> UpdateStatus(Guid idOrden, [FromBody] string TipoActualizacion)
+        {
+            try
+            {
+                var command = new ModificarEstatusOrdenCommand(new ModificarEstatusDto(idOrden,TipoActualizacion));
+                await Mediator.Send(command);
+                return Ok("Modificación Exitosa");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Ha ocurrido un error  al realizar la modificación");
+            }
+        }
+        [HttpGet("/information/{idPolizaAsegurado}")]
+        public async Task<IActionResult> GetInformationPolizaAsegurado(Guid idPolizaAsegurado)
+        {
+            try
+            {
+                var query = new InformacionPolizaQuery(idPolizaAsegurado);
+                var informacionPoliza = await Mediator.Send(query);
+                return Ok(informacionPoliza);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Hubo un error al procesar la busqueda");
             }
         }
     }

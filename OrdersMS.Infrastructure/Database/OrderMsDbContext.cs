@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MassTransit;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrdersMS.Core.Database;
 using OrdersMS.Domain.Entities;
 using System.Reflection;
@@ -25,9 +27,12 @@ namespace OrdersMS.Infrastructure.Database
         public DbSet<Poliza> Poliza { get; set; } = null!;
         public DbSet<PolizaAsegurado> PolizaAsegurado { get; set; } = null!;
         public DbSet<Tarifa> Tarifa { get; set; } = null!;
+        public DbSet<EstadoOrden> EstadoOrden { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+           
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -54,8 +59,9 @@ namespace OrdersMS.Infrastructure.Database
                 }
             }
 
-            // Llamar al método base para guardar los cambios en la base de datos
+            
             return await base.SaveChangesAsync(cancellationToken);
         }
+       
     }
 }

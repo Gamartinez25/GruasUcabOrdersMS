@@ -18,7 +18,7 @@ namespace OrdersMS.Core.Database
         DbSet<Poliza> Poliza { get; set; }
         DbSet<PolizaAsegurado> PolizaAsegurado { get; set; }
         DbSet<Tarifa> Tarifa { get; set; }
-
+        DbSet<EstadoOrden> EstadoOrden { get; set; }   
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         
     }

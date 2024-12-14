@@ -78,6 +78,24 @@ namespace OrdersMS.Infrastructure.Migrations
                     b.ToTable("CostoAdicional");
                 });
 
+            modelBuilder.Entity("OrdersMS.Domain.Entities.EstadoOrden", b =>
+                {
+                    b.Property<Guid>("CorrelationId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("EstadoActual")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<DateTime?>("UltimaActualizacion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("CorrelationId");
+
+                    b.ToTable("EstadoOrden", (string)null);
+                });
+
             modelBuilder.Entity("OrdersMS.Domain.Entities.OrdenCostoAdicional", b =>
                 {
                     b.Property<Guid>("OrdenDeServicioId")

@@ -11,6 +11,11 @@ using OrdersMS.Application.Mappers.TarifaMappers;
 using OrdersMS.Application.Mappers.OrdenMappers;
 using OrdersMS.Application.Mappers.CostoAdicionalMappers;
 using OrdersMS.Application.Validators.CostoAdicionalValidators;
+using MassTransit;
+using OrdersMS.Application.Saga;
+using OrdersMS.Domain.Entities;
+using OrdersMS.Infrastructure.Services;
+using OrdersMS.Core.Services.MsProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 var applicationAssembly = Assembly.Load("OrdersMS.Application");
@@ -41,6 +46,39 @@ builder.Services.AddAutoMapper(typeof(EntradaCostosAdicionalesMapper));
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<CrearTarifaValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<CostoAdicionalValidator>();
+
+builder.Services.AddMassTransit(cfg =>
+{
+    cfg.AddSagaStateMachine<MaquinaEstadoOrden, EstadoOrden>()
+        .EntityFrameworkRepository(r =>
+        {
+           // r.ConcurrencyMode = ConcurrencyMode.Pessimistic; // Manejo de concurrencia
+            r.ConcurrencyMode = ConcurrencyMode.Optimistic;
+            r.AddDbContext<DbContext, OrderMsContext>((provider, options) =>
+            {
+                options.UseNpgsql(dbConnectionString, npgsqlOptions =>
+                {
+                    npgsqlOptions.MigrationsAssembly(typeof(OrderMsContext).Assembly.GetName().Name);
+                });
+            });
+        });
+
+    cfg.UsingRabbitMq((context, rabbitCfg) =>
+    {
+        rabbitCfg.Host("rabbitmq://localhost", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        rabbitCfg.ConfigureEndpoints(context);
+    });
+});
+
+builder.Services.AddHttpClient<IMsProvidersServices, MsProvidersServices>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:7127");
+});
 
 
 

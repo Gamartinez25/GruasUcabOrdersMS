@@ -12,5 +12,8 @@ namespace OrdersMS.Application.Mappers.OrdenMappers
     {
         public IEnumerable<ListarOrdenesDto> ListarOrdenesDtos(IEnumerable<OrdenDeServicio> ordenes,IEnumerable<PolizaAsegurado> polizaAsegurados,IEnumerable<Poliza> polizas,IEnumerable<Asegurado>asegurados,IEnumerable<Tarifa> tarifas);
         public OrdenDeServicio ModificarOrden(OrdenDeServicio orden,ModificarOrdenDto ordenDto);
+
+        public InformacionPolizaDto ConsultarInformacionPoliza(Guid id, IEnumerable<PolizaAsegurado> polizaAsegurados, IEnumerable<Poliza> polizas, IEnumerable<Asegurado> asegurados, IEnumerable<Tarifa> tarifas);
+
     }
 }
