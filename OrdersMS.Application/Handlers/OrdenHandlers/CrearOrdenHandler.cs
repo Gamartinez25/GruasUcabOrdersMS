@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using MassTransit;
 using MediatR;
 using OrdersMS.Application.Commands.OrdenCommands;
 using OrdersMS.Application.Dtos.OrdenDtos;
 using OrdersMS.Application.Exceptions;
+using OrdersMS.Application.Saga.Events;
 using OrdersMS.Core.Repositories;
 using OrdersMS.Domain.Entities;
 
@@ -14,12 +16,17 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
         private readonly IMapper Mapper;
         private readonly IValidator<CrearOrdenDto> Validator;
         private readonly IOrdenRepository OrdenRepository;
+        private readonly IPublishEndpoint PublishEndpoint;
 
-        public CrearOrdenHandler(IMapper mapper, IOrdenRepository ordenRepository, IValidator<CrearOrdenDto> validator)
+
+
+        public CrearOrdenHandler(IMapper mapper, IOrdenRepository ordenRepository, IValidator<CrearOrdenDto> validator, IPublishEndpoint publishEndpoint)
         {
             Mapper = mapper;
             OrdenRepository = ordenRepository;
             Validator = validator;
+            PublishEndpoint = publishEndpoint;
+
         }
 
         public async Task Handle(CrearOrdenCommand request, CancellationToken cancellationToken)
@@ -27,6 +34,9 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
             ValidarOrden(request.CrearOrdenDto);
             var orden = MapperOrden(request.CrearOrdenDto);
             await OrdenRepository.AddOrdenAsync(orden);
+            var evento = new OrdenCreadaEvent { OrdenId = orden.Id };
+            await PublishEndpoint.Publish(evento, cancellationToken);
+
         }
         private  void ValidarOrden(CrearOrdenDto ordenDto)
         {

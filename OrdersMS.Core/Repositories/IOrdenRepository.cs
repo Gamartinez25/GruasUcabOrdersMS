@@ -12,5 +12,8 @@ namespace OrdersMS.Core.Repositories
         Task<IEnumerable<Poliza>> GetAllPolizaAsync();
         Task<OrdenDeServicio> GetOrdenDeServicioByIdAsync(Guid id);
         Task UpdateOrdenAsync(OrdenDeServicio orden);
+        Task<PolizaAsegurado> GetPolizaAseguradoById(Guid id);
+      //  Task<IEnumerable<T>> GetAllInformacionOrdenAsync();
+
     }
 }

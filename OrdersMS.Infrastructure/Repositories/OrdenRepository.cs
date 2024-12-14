@@ -26,6 +26,8 @@ namespace OrdersMS.Infrastructure.Repositories
             return await OrderMsDbContext.Asegurado.ToListAsync();
         }
 
+        
+
         public  async Task<IEnumerable<OrdenDeServicio>> GetAllOrdenAsync()
         {
             return await OrderMsDbContext.OrdenDeServicio.ToListAsync();
@@ -46,6 +48,13 @@ namespace OrdersMS.Infrastructure.Repositories
             var existingOrden = await OrderMsDbContext.OrdenDeServicio.FindAsync(id);
             if (existingOrden is null) throw new InvalidOperationException("Orden no encontrada");
             return existingOrden;
+        }
+
+        public async Task<PolizaAsegurado> GetPolizaAseguradoById(Guid id)
+        { 
+            var existingPoliza =await OrderMsDbContext.PolizaAsegurado.FindAsync(id);
+            return existingPoliza;
+
         }
 
         public async Task UpdateOrdenAsync(OrdenDeServicio orden)

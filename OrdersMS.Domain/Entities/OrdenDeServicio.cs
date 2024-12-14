@@ -68,6 +68,9 @@ namespace OrdersMS.Domain.Entities
            
         }
 
+        public OrdenDeServicio()
+        {
+        }
     }
 
 }

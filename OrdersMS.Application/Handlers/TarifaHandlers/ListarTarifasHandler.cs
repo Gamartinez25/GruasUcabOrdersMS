@@ -3,6 +3,7 @@ using MediatR;
 using OrdersMS.Application.Dtos.TarifaDtos;
 using OrdersMS.Application.Querys;
 using OrdersMS.Core.Repositories;
+using OrdersMS.Core.Services.MsProviders;
 
 
 namespace OrdersMS.Application.Handlers.TarifaHandlers
@@ -11,15 +12,17 @@ namespace OrdersMS.Application.Handlers.TarifaHandlers
     {
         private readonly IMapper Mapper;
         private readonly ITarifaRepository TarifaRepository;
+       
         public ListarTarifasHandler(IMapper mapper, ITarifaRepository tarifaRepository)
         {
             Mapper = mapper;
             TarifaRepository = tarifaRepository;
             
+            
         }
         public async Task<IEnumerable<ListarTarifaDto>> Handle(ListarTarifasQuery request, CancellationToken cancellationToken)
         {
-
+           
             var tarifas = await TarifaRepository.GetAllTarifaAsync();
             var tarifasActivas = tarifas.Where(x => x.Estatus == "Activo");
             var tarifasDto = Mapper.Map<IEnumerable<ListarTarifaDto>>(tarifasActivas);
