@@ -27,12 +27,13 @@ namespace OrdersMS.Application.Mappers.OrdenMappers
             return informacion;
         }
 
-        public IEnumerable<ListarOrdenesDto> ListarOrdenesDtos(IEnumerable<OrdenDeServicio> ordenes, IEnumerable<PolizaAsegurado> polizaAsegurados, IEnumerable<Poliza> polizas, IEnumerable<Asegurado> asegurados, IEnumerable<Tarifa> tarifas)
+        public IEnumerable<ListarOrdenesDto> ListarOrdenesDtos(IEnumerable<OrdenDeServicio> ordenes, IEnumerable<EstadoOrden> estatus, IEnumerable<PolizaAsegurado> polizaAsegurados, IEnumerable<Poliza> polizas, IEnumerable<Asegurado> asegurados, IEnumerable<Tarifa> tarifas)
         {
             var polizaAseguradosDiccionario = polizaAsegurados.ToDictionary(a => a.Id);
             var aseguradosDiccionario = asegurados.ToDictionary(a => a.Id);
             var polizasDiccionario = polizas.ToDictionary(a => a.Id);
             var tarifasDiccionario = tarifas.ToDictionary(a => a.Id);
+            var estatusDiccionario = estatus.ToDictionary(a => a.CorrelationId);
 
             var ordenesDto = new List<ListarOrdenesDto>();
             foreach (var orden in ordenes)
@@ -41,6 +42,7 @@ namespace OrdersMS.Application.Mappers.OrdenMappers
                 var poliza = polizasDiccionario[polizaAsegurado.PolizaId];
                 var tarifa = tarifasDiccionario[poliza.TarifaId];
                 var asegurado = aseguradosDiccionario[polizaAsegurado.AseguradoId];
+                var estatusOrden= estatusDiccionario[orden.Id];
                 var ordenDto = new ListarOrdenesDto
                 (
                 orden.Id,
@@ -49,7 +51,7 @@ namespace OrdersMS.Application.Mappers.OrdenMappers
                 orden.DireccionOrigen,
                 orden.DireccionDestino,
                 orden.CantidadKmExtra,
-                orden.Estatus,
+                estatusOrden.EstadoActual,
                 orden.NombreDenunciante,
                 orden.TipoDocumentoDenunciante,
                 orden.NumeroDocumentoDenunciante,
@@ -83,7 +85,7 @@ namespace OrdersMS.Application.Mappers.OrdenMappers
         public OrdenDeServicio ModificarOrden(OrdenDeServicio orden, ModificarOrdenDto ordenDto)
         {
             var nuevaOrden = new OrdenDeServicio(orden.Id, orden.Fecha, orden.DetallesIncidente, orden.DireccionOrigen,
-                orden.DireccionDestino, orden.Estatus, ordenDto.CostoTotal, orden.NombreDenunciante, orden.TipoDocumentoDenunciante,
+                orden.DireccionDestino, ordenDto.CostoTotal, orden.NombreDenunciante, orden.TipoDocumentoDenunciante,
                 orden.NumeroDocumentoDenunciante, orden.PolizaAseguradoId, orden.Administrador, orden.Operador,
                 ordenDto.Vehiculo, ordenDto.CantidadKmExtra, orden.CostoServiciosAdicionales, ordenDto.CostoTotalKmExtra);
             return nuevaOrden;

@@ -26,7 +26,10 @@ namespace OrdersMS.Infrastructure.Repositories
             return await OrderMsDbContext.Asegurado.ToListAsync();
         }
 
-        
+        public async Task<IEnumerable<EstadoOrden>> GetAllEstadoOrden()
+        {
+            return await OrderMsDbContext.EstadoOrden.ToListAsync();
+        }
 
         public  async Task<IEnumerable<OrdenDeServicio>> GetAllOrdenAsync()
         {

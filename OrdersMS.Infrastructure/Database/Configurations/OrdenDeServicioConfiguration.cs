@@ -14,7 +14,6 @@ namespace OrdersMS.Infrastructure.Database.Configurations
             builder.Property(o => o.DetallesIncidente).IsRequired().HasMaxLength(300);
             builder.Property(o => o.DireccionOrigen).IsRequired().HasMaxLength(200);
             builder.Property(o => o.DireccionDestino).IsRequired().HasMaxLength(200);
-            builder.Property(o => o.Estatus).IsRequired().HasMaxLength(30);
             builder.Property(o => o.CantidadKmExtra).IsRequired();
             builder.Property(o => o.CostoServiciosAdicionales).IsRequired().HasColumnType("numeric(12,2)");
             builder.Property(o => o.CostoTotalKmExtra).IsRequired().HasColumnType("numeric(12,2)");
