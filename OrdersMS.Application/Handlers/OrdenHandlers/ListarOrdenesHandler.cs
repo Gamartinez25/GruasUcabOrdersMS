@@ -23,12 +23,12 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
         public async Task<IEnumerable<ListarOrdenesDto>> Handle(ListarOrdenesQuery request, CancellationToken cancellationToken)
         {
             var ordenes = await OrdenRepository.GetAllOrdenAsync();
-            var ordenesNoEliminadas = ordenes.Where(x => x.Estatus != "Inactivo");
+            var estatusOrdenes = await OrdenRepository.GetAllEstadoOrden();
             var polizaAsegurados= await OrdenRepository.GetAllPolizaAseguradoAsync();
             var asegurados = await OrdenRepository.GetAllAseguradoAsync();
             var polizas= await OrdenRepository.GetAllPolizaAsync();
             var tarifas= await TarifaRepository.GetAllTarifaAsync();
-            return OrdenMapper.ListarOrdenesDtos(ordenesNoEliminadas,polizaAsegurados,polizas,asegurados,tarifas);
+            return OrdenMapper.ListarOrdenesDtos(ordenes, estatusOrdenes, polizaAsegurados,polizas,asegurados,tarifas);
            
         }
 

@@ -13,7 +13,6 @@ namespace OrdersMS.Domain.Entities
         public string DetallesIncidente { get; private set; }
         public string DireccionOrigen { get; private set; }
         public string DireccionDestino { get; private set; }
-        public string Estatus { get; private set; }
         public double? CantidadKmExtra { get; private set; }
         public double? CostoServiciosAdicionales { get; private set; }
         public double? CostoTotalKmExtra { get; private set; }
@@ -22,7 +21,6 @@ namespace OrdersMS.Domain.Entities
         public string TipoDocumentoDenunciante { get; private set; }
         public string NumeroDocumentoDenunciante { get; private set; }
 
-        // Relaciones
         public Guid PolizaAseguradoId { get; set; }  // Clave foránea a PolizaAsegurado
         public PolizaAsegurado? PolizaAsegurado { get; set; }  // Relación con PolizaAsegurado
 
@@ -35,7 +33,6 @@ namespace OrdersMS.Domain.Entities
                                string detallesIncidente,
                                string direccionOrigen,
                                string direccionDestino,
-                               string estatus,
                                double costoTotal,
                                string nombreDenunciante,
                                string tipoDocumentoDenunciante,
@@ -53,7 +50,6 @@ namespace OrdersMS.Domain.Entities
             DetallesIncidente = detallesIncidente;
             DireccionOrigen = direccionOrigen;
             DireccionDestino = direccionDestino;
-            Estatus = estatus;
             CantidadKmExtra = cantidadKmExtra;
             CostoServiciosAdicionales = costoServiciosAdicionales;
             CostoTotalKmExtra = costoTotalKmExtra;
