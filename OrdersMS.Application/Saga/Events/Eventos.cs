@@ -12,7 +12,6 @@
             OrdenId = ordenId;
         }
     }
-    public class OrdenAceptadaEvent { }
     public class OrdenCanceladaEvent 
     {
         public Guid OrdenId { get; set; }
@@ -21,11 +20,15 @@
             OrdenId = ordenId;
         }
     }
-    public class VehiculoAsignadoEvent { }
-    public class VehiculoLocalizadoEvent { }
-    public class OrdenEnProcesoEvent { }
-    public class OrdenFinalizadaEvent { }
-    public class OrdenPagadaEvent { }
+    public class ReasignarOrdenEvent
+    {
+        public Guid OrdenId { get; set; }
+        public ReasignarOrdenEvent(Guid ordenId)
+        {
+            OrdenId = ordenId;
+        }
+    }
+
 
 
 }

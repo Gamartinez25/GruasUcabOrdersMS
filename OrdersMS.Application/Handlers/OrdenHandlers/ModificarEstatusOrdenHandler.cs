@@ -29,12 +29,19 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
                     await PublishEndpoint.Publish(evento, cancellationToken);
 
                 }
-                else
+                if (request.EstatusDto.TipoActualizacion == "Cancelar")
                 {
                     var evento = new OrdenCanceladaEvent(request.EstatusDto.Id);
                     await PublishEndpoint.Publish(evento, cancellationToken);
                 }
-            
+                if (request.EstatusDto.TipoActualizacion == "Reasignar")
+                {
+                    var evento = new ReasignarOrdenEvent(request.EstatusDto.Id);
+                    await PublishEndpoint.Publish(evento, cancellationToken);
+                }
+
+
+
 
         }
     }
