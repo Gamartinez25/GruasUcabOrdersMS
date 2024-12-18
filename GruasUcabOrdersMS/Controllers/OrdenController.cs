@@ -88,5 +88,19 @@ namespace GruasUcabOrdersMS.Controllers
                 return StatusCode(500, "Hubo un error al procesar la busqueda");
             }
         }
+        [HttpGet("/OrdenStatus/{status}")]
+        public async Task<IActionResult> GetAllStatusOrdenByStatus(string status)
+        {
+            try
+            {
+                var query = new ListarEstatusOrdenPorEstatusQuery(status);
+                var informacionPoliza = await Mediator.Send(query);
+                return Ok(informacionPoliza);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Hubo un error al procesar la busqueda");
+            }
+        }
     }
 }

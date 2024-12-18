@@ -20,6 +20,7 @@ namespace OrdersMS.Application.Saga
         public Event<OrdenCreadaEvent> OrdenCreada{ get; set; }
         public Event<OrdenCanceladaEvent> OrdenCancelada { get; set; }
         public Event<ActualizarOrdenEvent> ActualizarOrden {  get; set; }
+        public Event<ReasignarOrdenEvent> ReasignarOrden { get; set; }
         public MaquinaEstadoOrden()
         {
 
@@ -28,6 +29,7 @@ namespace OrdersMS.Application.Saga
             Event(() => OrdenCreada, e => e.CorrelateById(m => m.Message.OrdenId));
             Event(() => ActualizarOrden, e => e.CorrelateById(m => m.Message.OrdenId));
             Event(() => OrdenCancelada, e => e.CorrelateById(m => m.Message.OrdenId));
+            Event(() => ReasignarOrden, e => e.CorrelateById(m => m.Message.OrdenId));
 
 
             Initially(
@@ -66,7 +68,13 @@ namespace OrdersMS.Application.Saga
                     {
                         context.Saga.UltimaActualizacion = DateTime.UtcNow;
                     })
-                    .TransitionTo(Cancelado));
+                    .TransitionTo(Cancelado),
+            When(ReasignarOrden)
+                .Then(context =>
+                {
+                    context.Saga.UltimaActualizacion = DateTime.UtcNow;
+                })
+                .TransitionTo(PorAsignar));
 
             During(Aceptado,
                When(ActualizarOrden)
