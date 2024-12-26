@@ -60,6 +60,18 @@ namespace OrdersMS.Infrastructure.Repositories
 
         }
 
+        public async Task<Tarifa> GetTarifaByIdOrdenAsync(Guid id)
+        {
+            var tarifa = await OrderMsDbContext.OrdenDeServicio
+           .Include(o => o.PolizaAsegurado) // Incluye la relación con PolizaAsegurado
+           .ThenInclude(pa => pa.Poliza) // Incluye la relación con Poliza
+           .ThenInclude(p => p.Tarifa) // Incluye la relación con Tarifa
+           .Where(o => o.Id == id) // Filtro por el ID de la Orden
+           .Select(o => o.PolizaAsegurado.Poliza.Tarifa) // Selecciona la póliza asociada
+           .FirstOrDefaultAsync();
+            return tarifa;
+        }
+
         public async Task UpdateOrdenAsync(OrdenDeServicio orden)
         {
            var existingOrden = await OrderMsDbContext.OrdenDeServicio.FindAsync(orden.Id);

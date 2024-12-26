@@ -44,7 +44,7 @@ namespace OrdersMS.Infrastructure.Repositories
                 throw new KeyNotFoundException("La tarifa no se encontró.");
             }
             OrderMsDbContext.Tarifa.Entry(existingTarifa).CurrentValues.SetValues(tarifa);
-            OrderMsDbContext.SaveChangesAsync();
+            await OrderMsDbContext.SaveChangesAsync();
         }
     }
 }

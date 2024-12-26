@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OrdersMS.Application.Dtos.OrdenDtos;
+using OrdersMS.Application.Services;
 using OrdersMS.Domain.Entities;
 
 namespace OrdersMS.Application.Mappers.OrdenMappers
@@ -82,13 +83,15 @@ namespace OrdersMS.Application.Mappers.OrdenMappers
             return ordenesDto;
         }
 
-        public OrdenDeServicio ModificarOrden(OrdenDeServicio orden, ModificarOrdenDto ordenDto)
+        public OrdenDeServicio ModificarOrden(Tarifa tarifa,OrdenDeServicio orden, ModificarOrdenDto ordenDto)
         {
+            var total = CalcularTotalOrden.CalcularTotalOrdenDeServicio(tarifa,orden.CostoTotalKmExtra,ordenDto.CostoTotalKmExtra);
             var nuevaOrden = new OrdenDeServicio(orden.Id, orden.Fecha, orden.DetallesIncidente, orden.DireccionOrigen,
-                orden.DireccionDestino, ordenDto.CostoTotal, orden.NombreDenunciante, orden.TipoDocumentoDenunciante,
+                orden.DireccionDestino, total, orden.NombreDenunciante, orden.TipoDocumentoDenunciante,
                 orden.NumeroDocumentoDenunciante, orden.PolizaAseguradoId, orden.Administrador, orden.Operador,
                 ordenDto.Vehiculo, ordenDto.CantidadKmExtra, orden.CostoServiciosAdicionales, ordenDto.CostoTotalKmExtra);
             return nuevaOrden;
         }
+        
     }
 }
