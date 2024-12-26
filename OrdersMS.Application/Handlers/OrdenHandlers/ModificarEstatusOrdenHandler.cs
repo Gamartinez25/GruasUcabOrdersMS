@@ -1,5 +1,4 @@
-﻿
-using FluentValidation;
+﻿using FluentValidation;
 using MassTransit;
 using MediatR;
 using OrdersMS.Application.Commands.OrdenCommands;

@@ -16,6 +16,8 @@ using OrdersMS.Application.Saga;
 using OrdersMS.Domain.Entities;
 using OrdersMS.Infrastructure.Services;
 using OrdersMS.Core.Services.MsProviders;
+using OrdersMS.Core.Services.IGoogleServices;
+using OrdersMS.Infrastructure.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 var applicationAssembly = Assembly.Load("OrdersMS.Application");
@@ -31,6 +33,7 @@ builder.Services.AddTransient<IOrdenRepository, OrdenRepository>();
 builder.Services.AddTransient<ICostoAdicionalRepository, CostoAdicionalRepository>();
 builder.Services.AddTransient<IOrdenMapper, OrdenMapper>();
 builder.Services.AddTransient<ISalidaCostoAdicionalMapper, SalidaCostoAdicionalMapper>();
+builder.Services.AddTransient<IVehiculosAsignadosRepository, VehiculosAsignadosRepository>();
 
 
 var dbConnectionString = builder.Configuration.GetValue<string>("DBConnectionString");
@@ -40,6 +43,8 @@ builder.Services.AddAutoMapper(typeof(EntradaTarifaMapper));
 builder.Services.AddAutoMapper(typeof(SalidaTarifaMapper));
 builder.Services.AddAutoMapper(typeof(EntradaOrdenMapper));
 builder.Services.AddAutoMapper(typeof(EntradaCostosAdicionalesMapper));
+builder.Services.AddAutoMapper(typeof(VehiculoMapper));
+
 
 
 
@@ -52,7 +57,6 @@ builder.Services.AddMassTransit(cfg =>
     cfg.AddSagaStateMachine<MaquinaEstadoOrden, EstadoOrden>()
         .EntityFrameworkRepository(r =>
         {
-           // r.ConcurrencyMode = ConcurrencyMode.Pessimistic; // Manejo de concurrencia
             r.ConcurrencyMode = ConcurrencyMode.Optimistic;
             r.AddDbContext<DbContext, OrderMsContext>((provider, options) =>
             {
@@ -77,9 +81,12 @@ builder.Services.AddMassTransit(cfg =>
 
 builder.Services.AddHttpClient<IMsProvidersServices, MsProvidersServices>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:7127");
+    client.BaseAddress = new Uri("http://localhost:7127");//poner el url del microservicio provider
 });
-
+builder.Services.AddHttpClient<IGoogleService, GoogleService>(client =>
+{
+    client.BaseAddress = new Uri("https://maps.googleapis.com/maps/api/");
+});
 
 
 var app = builder.Build();

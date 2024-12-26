@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OrdersMS.Application.Commands.AsignarConductorCommand;
 using OrdersMS.Application.Commands.OrdenCommands;
 using OrdersMS.Application.Dtos.OrdenDtos;
 using OrdersMS.Application.Querys;
@@ -43,23 +44,10 @@ namespace GruasUcabOrdersMS.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, "Hubo un error al procesar la busqueda");
+                return StatusCode(500, e.Message+"Hubo un error al procesar la busqueda");
             }
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateOrden(Guid id, [FromBody] ModificarOrdenDto ordenDto)
-        {
-            try
-            {
-                var command = new ModificarOrdenCommand(ordenDto, id);
-                await Mediator.Send(command);
-                return Ok("Modificación Exitosa");
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, "Ha ocurrido un error  al realizar la modificación");
-            }
-        }
+        
         [HttpPut("/status/{idOrden}")]
         public async Task<IActionResult> UpdateStatus(Guid idOrden, [FromBody] string TipoActualizacion)
         {
@@ -74,14 +62,28 @@ namespace GruasUcabOrdersMS.Controllers
                 return StatusCode(500, "Ha ocurrido un error  al realizar la modificación");
             }
         }
+        [HttpPut("/AsignacionGrua/{idOrden}")]
+        public async Task<IActionResult> AsignarGruaAutomaticamente(Guid idOrden)
+        {
+            try
+            {
+                var command = new AsignarConductorCommand(idOrden);
+                var resultado=await Mediator.Send(command);
+                return Ok(resultado);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Ha ocurrido un error  al realizar la modificación");
+            }
+        }
         [HttpGet("/information/{idPolizaAsegurado}")]
         public async Task<IActionResult> GetInformationPolizaAsegurado(Guid idPolizaAsegurado)
         {
             try
             {
                 var query = new InformacionPolizaQuery(idPolizaAsegurado);
-                var informacionPoliza = await Mediator.Send(query);
-                return Ok(informacionPoliza);
+                var vehiculosDisponibles = await Mediator.Send(query);
+                return Ok(vehiculosDisponibles);
             }
             catch (Exception e)
             {
@@ -102,5 +104,6 @@ namespace GruasUcabOrdersMS.Controllers
                 return StatusCode(500, "Hubo un error al procesar la busqueda");
             }
         }
+        
     }
 }

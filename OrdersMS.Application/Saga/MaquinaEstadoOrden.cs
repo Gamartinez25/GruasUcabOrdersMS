@@ -1,7 +1,6 @@
 ﻿using MassTransit;
-using MediatR;
-using OrdersMS.Application.Exceptions;
 using OrdersMS.Application.Saga.Events;
+using OrdersMS.Core.Repositories;
 using OrdersMS.Domain.Entities;
 
 namespace OrdersMS.Application.Saga
@@ -16,14 +15,16 @@ namespace OrdersMS.Application.Saga
         public State EnProceso { get; set; }
         public State Finalizado { get; set; }
         public State Pagado { get; set; }
-      //  public State Error {  get; set; }
+      
         public Event<OrdenCreadaEvent> OrdenCreada{ get; set; }
         public Event<OrdenCanceladaEvent> OrdenCancelada { get; set; }
         public Event<ActualizarOrdenEvent> ActualizarOrden {  get; set; }
         public Event<ReasignarOrdenEvent> ReasignarOrden { get; set; }
-        public MaquinaEstadoOrden()
-        {
 
+        private readonly IVehiculosAsignadosRepository VehiculosAsignadosRepository;
+        public MaquinaEstadoOrden(IVehiculosAsignadosRepository vehiculosAsignadosRepository)
+        {
+            VehiculosAsignadosRepository= vehiculosAsignadosRepository;
 
             InstanceState(x => x.EstadoActual);
             Event(() => OrdenCreada, e => e.CorrelateById(m => m.Message.OrdenId));
@@ -61,7 +62,9 @@ namespace OrdersMS.Application.Saga
                     .Then(context =>
                     {
                         context.Saga.UltimaActualizacion = DateTime.UtcNow;
-                    })
+                        VehiculosAsignadosRepository.DeleteAsignacionGrua(context.Message.OrdenId);    
+                    }
+                    )
                     .TransitionTo(Aceptado),
                 When(OrdenCancelada)
                     .Then(context =>

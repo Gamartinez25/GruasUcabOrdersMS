@@ -18,7 +18,8 @@ namespace OrdersMS.Application.Mappers.OrdenMappers
 
 
             CreateMap<ModificarOrdenDto, OrdenDeServicio>()
-                .ForMember(dest => dest.CostoServiciosAdicionales, opt => opt.MapFrom(src => 0));
+                .ForMember(dest => dest.CostoServiciosAdicionales, opt => opt.MapFrom(src => 0))
+                 .ForMember(dest => dest.CostoTotal, opt => opt.MapFrom(src => 0));
 
         }
     }

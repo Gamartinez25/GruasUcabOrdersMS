@@ -10,37 +10,36 @@ namespace OrdersMS.Core.Services.MsProviders
     public class Vehiculo
     {
         public Vehiculo(Guid id,
+                        string tipo,
                         string marca,
                         string modelo,
-                        string anio,
                         string placa,
                         string color,
-                        string estatus,
-                        string latitud,
-                        string longitud,
-                        DateTime ultimaActualizacion)
+                        double latitud,
+                        double longitud
+                        )
         {
             Id = id;
+            Tipo = tipo;
             Marca = marca;
             Modelo = modelo;
-            Anio = anio;
             Placa = placa;
             Color = color;
-            Estatus = estatus;
             Latitud = latitud;
             Longitud = longitud;
-            UltimaActualizacion = ultimaActualizacion;
+            
         }
 
         public Guid Id { get; private  set; }
+        public string Tipo { get; private set; }
         public string  Marca {  get; private set; }
         public string Modelo { get; private set; }
         public string Anio { get; private set; }
         public string Placa { get; private set; }
         public  string Color {  get; private set; }
         public string Estatus{ get; private set;}
-        public string Latitud {  get; private set; }
-        public string Longitud { get; private set; }
+        public double Latitud {  get; private set; }
+        public double Longitud { get; private set; }
         public DateTime UltimaActualizacion { get; private set; }
 
     }
