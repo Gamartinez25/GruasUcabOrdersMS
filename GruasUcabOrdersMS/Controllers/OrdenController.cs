@@ -26,7 +26,8 @@ namespace GruasUcabOrdersMS.Controllers
             {
                 var command = new CrearOrdenCommand(ordenDto);
                 await Mediator.Send(command);
-                return Ok("Registro Exitoso");
+                return Ok(new { message = "Registro exitoso", status = 200 });
+
             }
             catch (Exception e)
             {
@@ -90,14 +91,14 @@ namespace GruasUcabOrdersMS.Controllers
                 return StatusCode(500, "Hubo un error al procesar la busqueda");
             }
         }
-        [HttpGet("/OrdenStatus/{status}")]
-        public async Task<IActionResult> GetAllStatusOrdenByStatus(string status)
+        [HttpGet("/OrdenExpirada")]
+        public async Task<IActionResult> GetAllOrdenExpiradas()
         {
             try
             {
-                var query = new ListarEstatusOrdenPorEstatusQuery(status);
-                var informacionPoliza = await Mediator.Send(query);
-                return Ok(informacionPoliza);
+                var query = new AsignacionExpiradaCommand();
+                 await Mediator.Send(query);
+                return Ok();
             }
             catch (Exception e)
             {
