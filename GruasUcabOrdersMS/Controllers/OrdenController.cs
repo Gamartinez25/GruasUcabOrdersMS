@@ -25,7 +25,7 @@ namespace GruasUcabOrdersMS.Controllers
             {
                 var command = new CrearOrdenCommand(ordenDto);
                 await Mediator.Send(command);
-                return Ok("Registro Exitoso");
+                return Ok(new { message = "Registro exitoso", status = 200 });
             }
             catch (Exception e)
             {

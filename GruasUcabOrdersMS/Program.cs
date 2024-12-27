@@ -80,6 +80,16 @@ builder.Services.AddHttpClient<IMsProvidersServices, MsProvidersServices>(client
     client.BaseAddress = new Uri("http://localhost:7127");
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173") // Solo permite solicitudes desde este origen
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 
 
 var app = builder.Build();
@@ -89,7 +99,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
 }
+
+app.UseCors("AllowSpecificOrigin");
 
 app.UseHttpsRedirection();
 
