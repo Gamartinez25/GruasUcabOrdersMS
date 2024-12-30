@@ -46,6 +46,11 @@ namespace OrdersMS.Infrastructure.Repositories
             return await OrderMsDbContext.Poliza.ToListAsync();
         }
 
+        public async Task<EstadoOrden> GetEstadoOrdenByIdOrdenAsync(Guid id)
+        {
+            return await OrderMsDbContext.EstadoOrden.Where(x=>x.CorrelationId== id).FirstAsync();
+        }
+
         public async Task<OrdenDeServicio> GetOrdenDeServicioByIdAsync(Guid id)
         {
             var existingOrden = await OrderMsDbContext.OrdenDeServicio.FindAsync(id);

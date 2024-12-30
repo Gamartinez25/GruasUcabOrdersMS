@@ -34,7 +34,7 @@ namespace OrdersMS.Application.Handlers.CostoAdicionalHandlers
             Validator.ValidateAndThrow(request.CostoAdicionalDto);
             if (request.Id != request.CostoAdicionalDto.Id) { throw new IdsCostoAdicionalNoCoincidenException("Los ids del dto y de la peticion no coinciden"); }
             var existingCostoAdicional = await CostoAdicionalRepository.GetCostoAdicionalByIdAsync(request.Id);
-            if (existingCostoAdicional.Estatus!= "Por Abrobar") { throw new InvalidAdditionalCostStateException("No se puede modificar un costo adicional que no está en estado Por Aprobar"); }
+            if (existingCostoAdicional.Estatus!= "Por Aprobar") { throw new InvalidAdditionalCostStateException("No se puede modificar un costo adicional que no está en estado Por Aprobar"); }
         }
     }
 }

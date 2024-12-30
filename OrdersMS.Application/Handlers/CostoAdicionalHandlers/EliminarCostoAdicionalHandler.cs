@@ -17,7 +17,7 @@ namespace OrdersMS.Application.Handlers.CostoAdicionalHandlers
         public async Task Handle(EliminarCostoAdicionalCommand request, CancellationToken cancellationToken)
         {
             var existingCostoAdicional = await CostoAdicionalRepository.GetCostoAdicionalByIdAsync(request.Id);
-            if (existingCostoAdicional.Estatus != "Por Abrobar")
+            if (existingCostoAdicional.Estatus != "Por Aprobar")
             {
                 throw new InvalidAdditionalCostStateException("No se puede eliminar un costo adicional que no está en estado Por Aprobar");
             }

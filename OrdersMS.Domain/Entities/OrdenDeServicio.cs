@@ -67,6 +67,16 @@ namespace OrdersMS.Domain.Entities
         public OrdenDeServicio()
         {
         }
+        
+        public void ActualizarCostosServiciosAdicionales(double costoTotal)
+        {
+            CostoServiciosAdicionales=costoTotal;
+        }
+        public void ActualizarTotal (double costoTotal)
+        {
+           CostoTotal=costoTotal;
+        }
+
     }
 
 }

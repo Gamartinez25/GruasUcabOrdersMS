@@ -85,7 +85,7 @@ namespace OrdersMS.Application.Mappers.OrdenMappers
 
         public OrdenDeServicio ModificarOrden(Tarifa tarifa,OrdenDeServicio orden, ModificarOrdenDto ordenDto)
         {
-            var total = CalcularTotalOrden.CalcularTotalOrdenDeServicio(tarifa,orden.CostoTotalKmExtra,ordenDto.CostoTotalKmExtra);
+            var total = CalcularTotalOrden.CalcularTotalOrdenDeServicio(tarifa,ordenDto.CostoTotalKmExtra,orden.CostoServiciosAdicionales.Value);
             var nuevaOrden = new OrdenDeServicio(orden.Id, orden.Fecha, orden.DetallesIncidente, orden.DireccionOrigen,
                 orden.DireccionDestino, total, orden.NombreDenunciante, orden.TipoDocumentoDenunciante,
                 orden.NumeroDocumentoDenunciante, orden.PolizaAseguradoId, orden.Administrador, orden.Operador,

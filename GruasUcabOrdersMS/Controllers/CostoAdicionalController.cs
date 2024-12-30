@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OrdersMS.Application.Commands.CostoAdicionalCommands;
-using OrdersMS.Application.Commands.TarifaCommands;
 using OrdersMS.Application.Dtos.CostoAdicionalDtos;
 using OrdersMS.Application.Querys;
 
@@ -51,11 +50,25 @@ namespace GruasUcabOrdersMS.Controllers
             {
                 var command = new ModificarCostoAdicionalCommand(id, costoAdicionalDto);
                 await Mediator.Send(command);
-                return Ok("Modificación Exitosa");
+                return NoContent();
             }
             catch (Exception e)
             {
-                return StatusCode(500, e.Message+"Ha ocurrido un error  al realizar la modificación");
+                return StatusCode(500, "Ha ocurrido un error  al realizar la modificación");
+            }
+        }
+        [HttpPut("/proccesCostoAdicional{id}")]
+        public async Task<IActionResult> ProcessCostoAdicional(Guid id, [FromBody] string respuestaArobacion)
+        {
+            try
+            {
+                var command = new ProcesarRespuestaSolicitudCostoAdicionalCommand(id, respuestaArobacion);
+                await Mediator.Send(command);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Ha ocurrido un error  al procesar la solicitud");
             }
         }
         [HttpDelete("{id}")]
