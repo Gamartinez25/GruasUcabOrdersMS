@@ -27,6 +27,7 @@ namespace OrdersMS.Domain.Entities
             Estatus = estatus;
             Descripcion = descripcion;
         }
+        public OrdenCostoAdicional() { }
 
         public Guid IdCostoOrden {  get; set; }
         public Guid OrdenDeServicioId { get; set; }

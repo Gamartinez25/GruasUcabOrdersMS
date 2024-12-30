@@ -81,7 +81,7 @@ builder.Services.AddMassTransit(cfg =>
 
 builder.Services.AddHttpClient<IMsProvidersServices, MsProvidersServices>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:7127");//poner el url del microservicio provider
+    client.BaseAddress = new Uri("http://localhost:7255");//poner el url del microservicio provider
 });
 builder.Services.AddHttpClient<IGoogleService, GoogleService>(client =>
 {
