@@ -8,6 +8,7 @@ using OrdersMS.Application.Saga.Events;
 using OrdersMS.Application.Services;
 using OrdersMS.Core.Repositories;
 using OrdersMS.Core.Services.IGoogleServices;
+using OrdersMS.Core.Services.MsUsers;
 using OrdersMS.Domain.Entities;
 using OrdersMS.Domain.Services;
 using OrdersMS.Infrastructure.Mappers;
@@ -21,14 +22,16 @@ namespace OrdersMS.Application.Handlers.AsignarConductorHandler
         private readonly IOrdenMapper OrdenMapper;
         private readonly IPublishEndpoint PublishEndpoint;
         private readonly IVehiculosAsignadosRepository VehiculosAsignadosRepository;
+        private readonly IUserMsService UserMsService;
         
-        public AsignarConductorHandler(IOrdenRepository ordenRepository, IGoogleService googleService,IOrdenMapper ordenMapper, IPublishEndpoint publishEndpoint,IVehiculosAsignadosRepository vehiculosAsignados)
+        public AsignarConductorHandler(IOrdenRepository ordenRepository, IGoogleService googleService,IOrdenMapper ordenMapper, IPublishEndpoint publishEndpoint,IVehiculosAsignadosRepository vehiculosAsignados, IUserMsService userMsService)
         {
             OrdenRepository = ordenRepository;
             GoogleService = googleService;
             OrdenMapper = ordenMapper;
             PublishEndpoint = publishEndpoint;
             VehiculosAsignadosRepository = vehiculosAsignados;
+            UserMsService = userMsService;
 
         }
 
@@ -74,6 +77,7 @@ namespace OrdersMS.Application.Handlers.AsignarConductorHandler
             // Publicar evento
             var evento = new ActualizarOrdenEvent(request.OrdenId);
             await PublishEndpoint.Publish(evento, cancellationToken);
+            await UserMsService.SendNotification(gruaAsignada.Id);
 
             return vehiculoDto;
         }
