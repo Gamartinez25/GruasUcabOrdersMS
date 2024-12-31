@@ -18,6 +18,7 @@ using OrdersMS.Infrastructure.Services;
 using OrdersMS.Core.Services.MsProviders;
 using OrdersMS.Core.Services.IGoogleServices;
 using OrdersMS.Infrastructure.Mappers;
+using OrdersMS.Core.Services.MsUsers;
 
 var builder = WebApplication.CreateBuilder(args);
 var applicationAssembly = Assembly.Load("OrdersMS.Application");
@@ -82,6 +83,10 @@ builder.Services.AddMassTransit(cfg =>
 builder.Services.AddHttpClient<IMsProvidersServices, MsProvidersServices>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:7255");//poner el url del microservicio provider
+});
+builder.Services.AddHttpClient<IUserMsService, UserMsService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:7157");//poner el url del microservicio provider
 });
 builder.Services.AddHttpClient<IGoogleService, GoogleService>(client =>
 {
