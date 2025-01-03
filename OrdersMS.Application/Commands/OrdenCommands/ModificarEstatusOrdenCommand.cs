@@ -1,5 +1,4 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 using OrdersMS.Application.Dtos.OrdenDtos;
 
 namespace OrdersMS.Application.Commands.OrdenCommands

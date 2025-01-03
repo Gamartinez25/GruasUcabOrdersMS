@@ -1,6 +1,4 @@
-﻿using MassTransit;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
 using OrdersMS.Core.Database;
 using OrdersMS.Domain.Entities;
 using System.Reflection;

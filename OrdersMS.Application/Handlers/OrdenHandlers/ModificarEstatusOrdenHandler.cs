@@ -2,7 +2,6 @@
 using MassTransit;
 using MediatR;
 using OrdersMS.Application.Commands.OrdenCommands;
-using OrdersMS.Application.Exceptions;
 using OrdersMS.Application.Saga.Events;
 using OrdersMS.Application.Validators.OrdenValidators;
 

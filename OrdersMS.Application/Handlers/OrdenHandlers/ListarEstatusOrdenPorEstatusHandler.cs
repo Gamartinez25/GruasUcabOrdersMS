@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using OrdersMS.Application.Querys;
 using OrdersMS.Core.Repositories;
 using OrdersMS.Domain.Entities;
