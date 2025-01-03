@@ -14,7 +14,6 @@ namespace OrdersMS.Application.Dtos.OrdenDtos
         public Guid PolizaAseguradoId { get; set; }
         public Guid? Administrador { get; private set; }
         public Guid? Operador { get; private set; }
-        //public Guid Vehiculo { get; private set; }
         public CrearOrdenDto(string detallesIncidente,
                              string direccionOrigen,
                              string direccionDestino,

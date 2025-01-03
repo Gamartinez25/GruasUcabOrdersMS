@@ -105,6 +105,62 @@ namespace GruasUcabOrdersMS.Controllers
                 return StatusCode(500, "Hubo un error al procesar la busqueda");
             }
         }
-        
+        [HttpGet("/OrdenVigente/{idVehiculo}")]
+        public async Task<IActionResult> GetOrdenVigente(Guid idVehiculo)
+        {
+            try
+            {
+                var query = new ListarOrdenVigentePorGruaQuery(idVehiculo);
+                var order= await Mediator.Send(query);
+                return Ok(order);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Hubo un error al procesar la busqueda");
+            }
+        }
+        [HttpGet("/OrdenFinalizada/{idVehiculo}")]
+        public async Task<IActionResult> GetOrdenesFinalizadas(Guid idVehiculo)
+        {
+            try
+            {
+                var query = new ListarOrdenesFinalizadasQuery(idVehiculo);
+                var order = await Mediator.Send(query);
+                return Ok(order);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Hubo un error al procesar la busqueda");
+            }
+        }
+        [HttpGet("/OrdenCancelada/{idVehiculo}")]
+        public async Task<IActionResult> GetOrdenesCanceladas(Guid idVehiculo)
+        {
+            try
+            {
+                var query = new ListarOrdenesCanceladasQuery(idVehiculo);
+                var order = await Mediator.Send(query);
+                return Ok(order);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Hubo un error al procesar la busqueda");
+            }
+        }
+        [HttpGet("/OrdenesResumen/{idVehiculo}")]
+        public async Task<IActionResult> GetResumenOrdenes(Guid idVehiculo)
+        {
+            try
+            {
+                var query = new ListarResumenOrdenesQuery(idVehiculo);
+                var order = await Mediator.Send(query);
+                return Ok(order);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, "Hubo un error al procesar la busqueda");
+            }
+        }
+
     }
 }

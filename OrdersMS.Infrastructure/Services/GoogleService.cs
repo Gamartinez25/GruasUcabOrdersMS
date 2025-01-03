@@ -24,6 +24,31 @@ namespace OrdersMS.Infrastructure.Services
             Mapper= mapper;
         }
 
+        public async Task<string> GetDirecction(double latitud, double longitud)
+        {
+            
+            var coordenadas = $"{latitud.ToString(CultureInfo.InvariantCulture)},{longitud.ToString(CultureInfo.InvariantCulture)}";
+            var response = await HttpClient.GetAsync($"{Config["ServiosUrl:Google"]}geocode/json?latlng={coordenadas}&key={Config["ApiKey:Google"]}");
+            var content = await response.Content.ReadAsStringAsync();
+            using (var jsonDoc = JsonDocument.Parse(content))
+            {
+                var root = jsonDoc.RootElement;
+
+                if (root.GetProperty("status").GetString() != "OK")
+                {
+                    throw new  InvalidOperationException("Error al convertir las coordenadas en direccion");
+                }
+
+                var formattedAddress = root
+                    .GetProperty("results")[0]
+                    .GetProperty("formatted_address")
+                    .GetString();
+
+                return formattedAddress;
+            }
+
+        }
+
         public async Task<List<VehiculoDto>> GetDistanceAvailableVehiclesToOrigin( double origenLatitud, double origenLongitud)
         {
             var listaVehiculos = await MsProvidersServices.GetAllVehiculosAsync();
