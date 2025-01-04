@@ -57,14 +57,14 @@ namespace GruasUcabOrdersMS.Controllers
                 return StatusCode(500, "Ha ocurrido un error  al realizar la modificación");
             }
         }
-        [HttpPut("/proccesCostoAdicional{id}")]
+        [HttpPut("/proccesCostoAdicional/{id}")]
         public async Task<IActionResult> ProcessCostoAdicional(Guid id, [FromBody] string respuestaArobacion)
         {
             try
             {
                 var command = new ProcesarRespuestaSolicitudCostoAdicionalCommand(id, respuestaArobacion);
                 await Mediator.Send(command);
-                return NoContent();
+                return Ok(new { message = "Costo actualizado", status = 200 });
             }
             catch (Exception e)
             {
