@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OrdersMS.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class MaquinaEstadoMigracion : Migration
+    public partial class MigracionInicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,8 +45,7 @@ namespace OrdersMS.Infrastructure.Migrations
                 columns: table => new
                 {
                     CorrelationId = table.Column<Guid>(type: "uuid", nullable: false),
-                    EstadoActual = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
-                    OrdenId = table.Column<Guid>(type: "uuid", nullable: false),
+                    EstadoActual = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
                     UltimaActualizacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -138,7 +137,6 @@ namespace OrdersMS.Infrastructure.Migrations
                     DetallesIncidente = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false),
                     DireccionOrigen = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     DireccionDestino = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Estatus = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
                     CantidadKmExtra = table.Column<double>(type: "double precision", nullable: false),
                     CostoServiciosAdicionales = table.Column<double>(type: "numeric(12,2)", nullable: false),
                     CostoTotalKmExtra = table.Column<double>(type: "numeric(12,2)", nullable: false),
@@ -150,6 +148,7 @@ namespace OrdersMS.Infrastructure.Migrations
                     Administrador = table.Column<Guid>(type: "uuid", nullable: true),
                     Operador = table.Column<Guid>(type: "uuid", nullable: true),
                     Vehiculo = table.Column<Guid>(type: "uuid", nullable: true),
+                    NumeroFactura = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     FechaCreacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreadoPor = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     FechaActualizacion = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),

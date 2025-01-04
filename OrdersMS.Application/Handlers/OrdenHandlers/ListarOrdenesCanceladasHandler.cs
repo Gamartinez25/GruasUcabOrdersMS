@@ -32,6 +32,7 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
                     var direccionOrigen = await GoogleService.GetDirecction(latOrigen, lonOrigen);
                     var direccionDestino = await GoogleService.GetDirecction(latDestino, lonDestino);
                     var ordenCancelada= new OrdenCanceladaDto(orden.Id,
+                                                              orden.NumeroFactura,
                                                               orden.NombreDenunciante,
                                                               direccionOrigen,
                                                               direccionDestino,

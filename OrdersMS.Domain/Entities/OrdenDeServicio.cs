@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +29,9 @@ namespace OrdersMS.Domain.Entities
         public Guid? Operador { get; private set; }
         public Guid? Vehiculo {  get; private set; }
         public ICollection<OrdenCostoAdicional>? OrdenCostosAdicionales { get; private set; }
+        public string? NumeroFactura { get; private set; }
         public OrdenDeServicio(Guid id,
+                               string numeroFactura,
                                DateTime fecha,
                                string detallesIncidente,
                                string direccionOrigen,
@@ -46,6 +49,7 @@ namespace OrdersMS.Domain.Entities
                                double? costoTotalKmExtra = null)
         {
             Id = id;
+            NumeroFactura= numeroFactura;
             Fecha = fecha;
             DetallesIncidente = detallesIncidente;
             DireccionOrigen = direccionOrigen;

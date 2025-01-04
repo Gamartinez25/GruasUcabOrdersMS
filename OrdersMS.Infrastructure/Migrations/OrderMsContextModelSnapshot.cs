@@ -207,6 +207,10 @@ namespace OrdersMS.Infrastructure.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("character varying(8)");
 
+                    b.Property<string>("NumeroFactura")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
                     b.Property<Guid?>("Operador")
                         .HasColumnType("uuid");
 

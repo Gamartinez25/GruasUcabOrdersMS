@@ -5,6 +5,7 @@ namespace OrdersMS.Application.Dtos.OrdenDtos
     public class ListarOrdenesDto
     {
         public ListarOrdenesDto(Guid id,
+                                string numeroFactura,
                                 string detallesIncidente,
                                 DateTime fecha,
                                 string direccionOrigen,
@@ -37,6 +38,7 @@ namespace OrdersMS.Application.Dtos.OrdenDtos
                                 Guid polizaAseguradoId)
         {
             Id = id;
+            NumeroFactura = numeroFactura;
             DetallesIncidente = detallesIncidente;
             Fecha = fecha;
             DireccionOrigen = direccionOrigen;
@@ -71,6 +73,7 @@ namespace OrdersMS.Application.Dtos.OrdenDtos
     }
 
         public Guid Id { get; private set; }
+        public string NumeroFactura { get; private set; }
         public string DetallesIncidente { get; private set; }
         public DateTime Fecha { get; private set; }
         public string DireccionOrigen { get; private set; }

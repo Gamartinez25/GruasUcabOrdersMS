@@ -12,8 +12,8 @@ using OrdersMS.Infrastructure.Database;
 namespace OrdersMS.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderMsContext))]
-    [Migration("20241214165700_CambioOrdenServicio")]
-    partial class CambioOrdenServicio
+    [Migration("20250103231058_MigracionInicial")]
+    partial class MigracionInicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -209,6 +209,10 @@ namespace OrdersMS.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("character varying(8)");
+
+                    b.Property<string>("NumeroFactura")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<Guid?>("Operador")
                         .HasColumnType("uuid");

@@ -6,6 +6,7 @@ namespace OrdersMS.Application.Dtos.OrdenDtos
     {
         public OrdenVigentePorGruaDto(Guid id,
                                              string detallesIncidente,
+                                             string numeroFactura,
                                              string direccionOrigen,
                                              string direcionDestino,
                                              string nombreDenunciante,
@@ -13,6 +14,7 @@ namespace OrdersMS.Application.Dtos.OrdenDtos
                                              )
         {
             Id = id;
+            NumeroFactura = numeroFactura;
             DetallesIncidente = detallesIncidente;
             DireccionOrigen = direccionOrigen;
             DireccionDestino = direcionDestino;
@@ -24,6 +26,7 @@ namespace OrdersMS.Application.Dtos.OrdenDtos
         public OrdenVigentePorGruaDto() { }
 
         public Guid Id { get;  private set; }
+        public string NumeroFactura { get; private set; }
         public string DetallesIncidente { get; private set; }
         public string DireccionOrigen { get; private set; }
         public string DireccionDestino { get; private set; }
