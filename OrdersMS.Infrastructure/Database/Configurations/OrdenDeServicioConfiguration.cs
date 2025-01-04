@@ -25,6 +25,7 @@ namespace OrdersMS.Infrastructure.Database.Configurations
             builder.Property(s => s.ActualizadoPor).HasDefaultValue(null).HasMaxLength(100);
             builder.Property(s => s.FechaCreacion).HasDefaultValue(null);
             builder.Property(s => s.FechaActualizacion).HasDefaultValue(null);
+            builder.Property(s => s.NumeroFactura).HasDefaultValue(null).HasMaxLength(100);
 
             builder.HasMany(o => o.OrdenCostosAdicionales) // OrdenDeServicio tiene muchas relaciones con CostoAdicional
                    .WithOne(oca => oca.OrdenDeServicio)     // OrdenCostoAdicional tiene una OrdenDeServicio

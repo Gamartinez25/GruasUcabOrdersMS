@@ -70,10 +70,14 @@ builder.Services.AddMassTransit(cfg =>
 
     cfg.UsingRabbitMq((context, rabbitCfg) =>
     {
-        rabbitCfg.Host("rabbitmq://localhost", h =>
+        var rabbitConfig = builder.Configuration.GetSection("Rabbit");
+        var host = rabbitConfig["Host"];
+        var username = rabbitConfig["Username"];
+        var password = rabbitConfig["Password"];
+        rabbitCfg.Host(host, h =>
         {
-            h.Username("guest");
-            h.Password("guest");
+            h.Username(username);
+            h.Password(password);
         });
 
         rabbitCfg.ConfigureEndpoints(context);
@@ -82,15 +86,19 @@ builder.Services.AddMassTransit(cfg =>
 
 builder.Services.AddHttpClient<IMsProvidersServices, MsProvidersServices>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:7255");//poner el url del microservicio provider
+    var providerConfig = builder.Configuration.GetSection("ServiosUrl");
+    client.BaseAddress = new Uri(providerConfig["MsProvidersBase"]);//poner el url del microservicio provider
 });
 builder.Services.AddHttpClient<IUserMsService, UserMsService>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:7157");//poner el url del microservicio provider
+    var userConfig = builder.Configuration.GetSection("ServiosUrl");
+    client.BaseAddress = new Uri(userConfig["MsUserBase"]);//poner el url del microservicio provider
 });
 builder.Services.AddHttpClient<IGoogleService, GoogleService>(client =>
 {
-    client.BaseAddress = new Uri("https://maps.googleapis.com/maps/api/");
+    var googleConfig = builder.Configuration.GetSection("ServiosUrl");
+
+    client.BaseAddress = new Uri(googleConfig["Google"]);
 });
 
 builder.Services.AddCors(options =>

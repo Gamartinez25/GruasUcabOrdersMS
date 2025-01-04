@@ -34,6 +34,7 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
                     var direccionOrigen = await GoogleService.GetDirecction(latOrigen, lonOrigen);
                     var direccionDestino = await GoogleService.GetDirecction(latDestino, lonDestino);
                     var ordenFinalizada = new OrdenesFinalizadasDto(orden.Id,
+                                                                        orden.NumeroFactura,
                                                                         orden.NombreDenunciante,
                                                                         orden.Fecha.ToString(),
                                                                         direccionOrigen,

@@ -56,7 +56,7 @@ namespace GruasUcabOrdersMS.Controllers
             {
                 var command = new ModificarEstatusOrdenCommand(new ModificarEstatusDto(idOrden,TipoActualizacion));
                 await Mediator.Send(command);
-                return Ok("Modificación Exitosa");
+                return NoContent();
             }
             catch (Exception e)
             {

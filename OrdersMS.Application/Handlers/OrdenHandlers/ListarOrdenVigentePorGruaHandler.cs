@@ -35,6 +35,7 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
                     var direccionDestino = await GoogleService.GetDirecction(latDestino, lonDestino);
                     ordenVigente = new OrdenVigentePorGruaDto(orden.Id,
                                                                    orden.DetallesIncidente,
+                                                                   orden.NumeroFactura,
                                                                    direccionOrigen,
                                                                    direccionDestino,
                                                                    orden.NombreDenunciante,

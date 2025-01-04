@@ -32,6 +32,7 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
                     var direccionDestino = await GoogleService.GetDirecction(latDestino, lonDestino);
                     var resumenOrden = new ResumenOrdenDto(orden.Id,
                                                            direccionOrigen,
+                                                           orden.NumeroFactura,
                                                            direccionDestino,
                                                            orden.NombreDenunciante,
                                                            estatus.EstadoActual);

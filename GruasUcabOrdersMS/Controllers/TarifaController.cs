@@ -24,7 +24,7 @@ namespace GruasUcabOrdersMS.Controllers
             {
                 var command = new CrearTarifaCommand(tarifaDto);
                 await Mediator.Send(command);
-                return Ok("Registro Exitoso");
+                return Ok(new { message = "Registro exitoso", status = 200 });
             }
             catch (Exception e)
             {
@@ -52,7 +52,7 @@ namespace GruasUcabOrdersMS.Controllers
             {
                 var command = new ModificarTarifaCommand(tarifaDto,id);
                 await Mediator.Send(command);
-                return Ok("Modificación Exitosa");
+                return NoContent();
             }
             catch (Exception e)
             {
@@ -66,7 +66,7 @@ namespace GruasUcabOrdersMS.Controllers
             {
                 var command = new EliminarTarifaCommand(id);
                 await Mediator.Send(command);
-                return Ok("Eliminacion Exitosa");
+                return Ok(new { message = "Registro exitoso", status = 200 });
             }
             catch (Exception e)
             {
