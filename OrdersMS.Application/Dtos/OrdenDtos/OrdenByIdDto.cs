@@ -2,9 +2,13 @@
 
 namespace OrdersMS.Application.Dtos.OrdenDtos
 {
-    public  class OrdenesFinalizadasDto
+    public  class OrdenByIdDto
     {
-        public OrdenesFinalizadasDto(Guid id,
+        public OrdenByIdDto()
+        {
+        }
+
+        public OrdenByIdDto(Guid id,
                                             string numeroFactura,
                                             string denunciante,
                                             string fecha,

@@ -119,12 +119,12 @@ namespace GruasUcabOrdersMS.Controllers
                 return StatusCode(500, "Hubo un error al procesar la busqueda");
             }
         }
-        [HttpGet("/OrdenFinalizada/{idVehiculo}")]
-        public async Task<IActionResult> GetOrdenesFinalizadas(Guid idVehiculo)
+        [HttpGet("/Orden/{idOrden}")]
+        public async Task<IActionResult> GetOrdenById(Guid idOrden)
         {
             try
             {
-                var query = new ListarOrdenesFinalizadasQuery(idVehiculo);
+                var query = new ListarOrdenByIdQuery(idOrden);
                 var order = await Mediator.Send(query);
                 return Ok(order);
             }
