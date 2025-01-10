@@ -8,6 +8,32 @@ namespace OrdersMS.Domain.Entities
 {
     public class PolizaAsegurado
     {
+        public PolizaAsegurado()
+        {
+        }
+
+        public PolizaAsegurado(Guid id,
+                               string fechaInicioCobertura,
+                               string fechaVencimientoCobertura,
+                               string marca,
+                               string modelo,
+                               string anio,
+                               string placa,
+                               string tipoVehiculo,
+                               string color,
+                               string estatus)
+        {
+            Id = id;
+            FechaInicioCobertura = fechaInicioCobertura;
+            FechaVencimientoCobertura = fechaVencimientoCobertura;
+            Marca = marca;
+            Modelo = modelo;
+            Anio = anio;
+            Placa = placa;
+            TipoVehiculo = tipoVehiculo;
+            Color = color;
+            Estatus = estatus;
+        }
         public Guid Id { get; set; }
         public string FechaInicioCobertura { get; set; }
         public string FechaVencimientoCobertura { get; private set; }

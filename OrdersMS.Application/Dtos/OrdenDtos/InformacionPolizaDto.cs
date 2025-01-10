@@ -4,6 +4,10 @@ namespace OrdersMS.Application.Dtos.OrdenDtos
 {
     public class InformacionPolizaDto
     {
+        public InformacionPolizaDto()
+        {
+        }
+
         public InformacionPolizaDto(Guid polizaAseguradoId,
                                     string nombreAsegurado,
                                     string documentoIdentidad,

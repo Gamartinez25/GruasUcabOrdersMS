@@ -8,6 +8,17 @@ namespace OrdersMS.Domain.Entities
 {
     public class Poliza
     {
+        public Poliza()
+        {
+        }
+
+        public Poliza(Guid id, string nombre, double costo, string descripcion)
+        {
+            Id = id;
+            Nombre = nombre;
+            Costo = costo;
+            Descripcion = descripcion;
+        }
         public Guid Id { get;  private set; }
         public string Nombre { get;  private set; }
         public double Costo { get; private  set; }
