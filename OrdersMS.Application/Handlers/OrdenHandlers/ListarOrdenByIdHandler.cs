@@ -40,10 +40,7 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
                                                                         "#" + polizaAsegurado.Placa + ", " + polizaAsegurado.Marca + " " + polizaAsegurado.Modelo + ", " + polizaAsegurado.Color + ", " + polizaAsegurado.Anio + "."
                                                                         , orden.DetallesIncidente, orden.CostoTotal, orden.CostoServiciosAdicionales.Value, estatus.EstadoActual);
 
-                return ordenFinalizada;
-
-            
-            
+                return ordenFinalizada;   
         }
     }
 }

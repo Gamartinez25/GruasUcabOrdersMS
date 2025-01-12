@@ -32,12 +32,14 @@ namespace OrdersMs.Test.Application.Queries
         {
             //Arrange
             var polizaAsegurado = new PolizaAsegurado(Guid.NewGuid(), "12-02-2024", "12-02-2025", "Ford", "Aveo", "2004", "AA09DS", "Carro", "Azul", "Activo");
-
-           OrdenRepositoryMock.Setup(s=>s.GetPolizaAseguradoById(Guid.NewGuid())).ReturnsAsync(new PolizaAsegurado());
-           OrdenRepositoryMock.Setup(s => s.GetAllPolizaAsync()).ReturnsAsync( new List<Poliza>());
-           OrdenRepositoryMock.Setup(s => s.GetAllAseguradoAsync()).ReturnsAsync(new List<Asegurado>());
-           TarifaRepositoryMock.Setup(s=>s.GetAllTarifaAsync()).ReturnsAsync(new List<Tarifa>());
-           OrdenMapperMock.Setup(s => s.ConsultarInformacionPoliza(It.IsAny<Guid>(),
+            var polizas = new List<Poliza>{new Poliza(   Guid.Parse("a1b2c3d4-e5f6-7890-abcd-1234567890ef"),   "Poliza Básica",   500.0,"Cobertura básica contra accidentes menores")};
+            var asegurados = new List<Asegurado>{new Asegurado( Guid.NewGuid(), "Juan", "Pérez", "1990-05-15", "Cédula", "12345678", "Activo")};
+            var tarifas = new List<Tarifa>{new Tarifa (Guid.NewGuid(), "Tarifa 1",100, 50, 2,"Activo" ),};
+            OrdenRepositoryMock.Setup(s=>s.GetPolizaAseguradoById(Guid.NewGuid())).ReturnsAsync(new PolizaAsegurado());
+            OrdenRepositoryMock.Setup(s => s.GetAllPolizaAsync()).ReturnsAsync(polizas);
+            OrdenRepositoryMock.Setup(s => s.GetAllAseguradoAsync()).ReturnsAsync(asegurados);
+            TarifaRepositoryMock.Setup(s=>s.GetAllTarifaAsync()).ReturnsAsync(tarifas);
+            OrdenMapperMock.Setup(s => s.ConsultarInformacionPoliza(It.IsAny<Guid>(),
                                                                     It.IsAny<IEnumerable<PolizaAsegurado>>(),
                                                                     It.IsAny<IEnumerable<Poliza>>(),
                                                                     It.IsAny<IEnumerable<Asegurado>>(),

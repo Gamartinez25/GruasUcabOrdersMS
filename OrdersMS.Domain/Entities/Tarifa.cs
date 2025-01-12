@@ -8,6 +8,16 @@ namespace OrdersMS.Domain.Entities
 {
     public class Tarifa:Base
     {
+        public Tarifa(Guid id, string nombre, double costoBase, double distanciaKm, double costoPorKm, string estatus)
+        {
+            Id = id;
+            Nombre = nombre;
+            CostoBase = costoBase;
+            DistanciaKm = distanciaKm;
+            CostoPorKm = costoPorKm;
+            Estatus = estatus;
+        }
+
         public Guid Id { get; private set; }
         public string Nombre { get; private set; }
         public double CostoBase { get;  private set; }
