@@ -12,14 +12,12 @@ namespace OrdersMS.Application.Handlers.TarifaHandlers
     public class CrearTarifaHandler : IRequestHandler<CrearTarifaCommand>
     {
         private readonly IMapper Mapper;
-        private readonly IValidator<CrearTarifaDto> Validator;
         private readonly ITarifaRepository TarifaRepository;
 
-        public CrearTarifaHandler(IMapper mapper, ITarifaRepository tarifaRepository, IValidator<CrearTarifaDto> validator)
+        public CrearTarifaHandler(IMapper mapper, ITarifaRepository tarifaRepository)
         {
             Mapper = mapper;
             TarifaRepository= tarifaRepository;
-            Validator = validator;  
         }
 
         public async Task Handle(CrearTarifaCommand request, CancellationToken cancellationToken)
@@ -30,7 +28,8 @@ namespace OrdersMS.Application.Handlers.TarifaHandlers
         }
         private  void ValidarTarifa(CrearTarifaDto tarifaDto)
         {
-            Validator.ValidateAndThrow(tarifaDto);
+            var validator = new CrearTarifaValidator();
+            validator.ValidateAndThrow(tarifaDto);
 
         }
         private Tarifa MapperTarifa(CrearTarifaDto tarifaDto) 
