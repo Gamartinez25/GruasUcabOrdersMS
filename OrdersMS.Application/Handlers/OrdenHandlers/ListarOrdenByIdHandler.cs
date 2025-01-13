@@ -22,7 +22,7 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
         {
             var ordenes = await OrdenRepository.GetAllOrdenAsync();
             var orden = ordenes.Where(x => x.Id == request.IdOrden).First();
-            OrdenByIdDto ordenFinalizada;
+           // OrdenByIdDto ordenFinalizada;
            
                 var estatus = await OrdenRepository.GetEstadoOrdenByIdOrdenAsync(orden.Id);
                 var polizaAsegurado = await OrdenRepository.GetPolizaAseguradoById(orden.PolizaAseguradoId);
@@ -30,7 +30,7 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
                     var (latDestino, lonDestino) = ObtenerCoordenadas.SepararCoordenadas(orden.DireccionDestino);
                     var direccionOrigen = await GoogleService.GetDirecction(latOrigen, lonOrigen);
                     var direccionDestino = await GoogleService.GetDirecction(latDestino, lonDestino);
-                    ordenFinalizada = new OrdenByIdDto(orden.Id,
+                var       ordenFinalizada = new OrdenByIdDto(orden.Id,
                                                                         orden.NumeroFactura,
                                                                         orden.NombreDenunciante,
                                                                         

@@ -19,6 +19,14 @@ namespace OrdersMS.Domain.Entities
             Costo = costo;
             Descripcion = descripcion;
         }
+        public Poliza(Guid id, string nombre, double costo, string descripcion,Guid tarifaId)
+        {
+            Id = id;
+            Nombre = nombre;
+            Costo = costo;
+            Descripcion = descripcion;
+            TarifaId = tarifaId;
+        }
         public Guid Id { get;  private set; }
         public string Nombre { get;  private set; }
         public double Costo { get; private  set; }

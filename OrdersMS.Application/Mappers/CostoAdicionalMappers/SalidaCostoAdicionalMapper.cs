@@ -6,10 +6,7 @@ namespace OrdersMS.Application.Mappers.CostoAdicionalMappers
 {
     public class SalidaCostoAdicionalMapper : ISalidaCostoAdicionalMapper
     {
-        public OrdenCostoAdicional MapEntrada(OrdenCostoAdicional existingCostoAdicional, ModificarCostoAdicionalDto costoAdicionalDto)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         public IEnumerable<ListarCostosAdicionalesPorOrdenDto> Map(IEnumerable<OrdenCostoAdicional> ordenCostoAdicionales, IEnumerable<Tuple<Guid, string>> nombreCostos)
         {
