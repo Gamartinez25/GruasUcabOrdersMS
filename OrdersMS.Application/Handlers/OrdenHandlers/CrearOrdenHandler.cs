@@ -6,6 +6,7 @@ using OrdersMS.Application.Commands.OrdenCommands;
 using OrdersMS.Application.Dtos.OrdenDtos;
 using OrdersMS.Application.Exceptions;
 using OrdersMS.Application.Saga.Events;
+using OrdersMS.Application.Validators.OrdenValidators;
 using OrdersMS.Core.Repositories;
 using OrdersMS.Domain.Entities;
 
@@ -14,17 +15,15 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
     public class CrearOrdenHandler:IRequestHandler<CrearOrdenCommand>
     {
         private readonly IMapper Mapper;
-        private readonly IValidator<CrearOrdenDto> Validator;
         private readonly IOrdenRepository OrdenRepository;
         private readonly IPublishEndpoint PublishEndpoint;
 
 
 
-        public CrearOrdenHandler(IMapper mapper, IOrdenRepository ordenRepository, IValidator<CrearOrdenDto> validator, IPublishEndpoint publishEndpoint)
+        public CrearOrdenHandler(IMapper mapper, IOrdenRepository ordenRepository, IPublishEndpoint publishEndpoint)
         {
             Mapper = mapper;
             OrdenRepository = ordenRepository;
-            Validator = validator;
             PublishEndpoint = publishEndpoint;
 
         }
@@ -40,7 +39,8 @@ namespace OrdersMS.Application.Handlers.OrdenHandlers
         }
         private  void ValidarOrden(CrearOrdenDto ordenDto)
         {
-            Validator.ValidateAndThrow(ordenDto);
+            var validator =new CrearOrdenValidator();
+            validator.ValidateAndThrow(ordenDto);
             if (ordenDto.Administrador == null && ordenDto.Operador==null)
             {
                 throw new InvalidIdException("El id del responsable de crear la orden no puede ser nulo");

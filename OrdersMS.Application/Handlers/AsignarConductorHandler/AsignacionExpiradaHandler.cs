@@ -4,7 +4,6 @@ using MediatR;
 using OrdersMS.Application.Commands.AsignarConductorCommand;
 using OrdersMS.Application.Saga.Events;
 using OrdersMS.Core.Repositories;
-using OrdersMS.Domain.Entities;
 
 namespace OrdersMS.Application.Handlers.AsignarConductorHandler
 {
