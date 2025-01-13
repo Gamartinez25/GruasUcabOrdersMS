@@ -7,7 +7,6 @@ namespace OrdersMS.Application.Dtos.OrdenDtos
         public OrdenByIdDto()
         {
         }
-
         public OrdenByIdDto(Guid id,
                                             string numeroFactura,
                                             string denunciante,

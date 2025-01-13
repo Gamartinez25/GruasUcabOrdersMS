@@ -34,6 +34,33 @@ namespace OrdersMS.Domain.Entities
             Color = color;
             Estatus = estatus;
         }
+        public PolizaAsegurado(Guid id,
+                               string fechaInicioCobertura,
+                               string fechaVencimientoCobertura,
+                               string marca,
+                               string modelo,
+                               string anio,
+                               string placa,
+                               string tipoVehiculo,
+                               string color,
+                               string estatus,
+                               Guid polizaId,
+                               Guid aseguradoId)
+        {
+            Id = id;
+            FechaInicioCobertura = fechaInicioCobertura;
+            FechaVencimientoCobertura = fechaVencimientoCobertura;
+            Marca = marca;
+            Modelo = modelo;
+            Anio = anio;
+            Placa = placa;
+            TipoVehiculo = tipoVehiculo;
+            Color = color;
+            Estatus = estatus;
+            PolizaId = polizaId;
+            AseguradoId=aseguradoId;
+
+        }
         public Guid Id { get; set; }
         public string FechaInicioCobertura { get; set; }
         public string FechaVencimientoCobertura { get; private set; }
