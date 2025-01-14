@@ -24,6 +24,13 @@ var builder = WebApplication.CreateBuilder(args);
 var applicationAssembly = Assembly.Load("OrdersMS.Application");
 // Add services to the container.
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5101); // Puerto HTTP
+    options.ListenAnyIP(7057); // Puerto HTTPS
+});
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

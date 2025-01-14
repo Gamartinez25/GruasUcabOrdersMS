@@ -3,15 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GruasUcabOrdersMS", "GruasUcabOrdersMS\GruasUcabOrdersMS.csproj", "{AC54F95C-6EC2-481C-BDB5-CA35BD377D72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GruasUcabOrdersMS", "GruasUcabOrdersMS\GruasUcabOrdersMS.csproj", "{AC54F95C-6EC2-481C-BDB5-CA35BD377D72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersMS.Infrastructure", "OrdersMS.Infrastructure\OrdersMS.Infrastructure.csproj", "{D272AB09-BF78-4990-AC42-B2740630C55D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersMS.Infrastructure", "OrdersMS.Infrastructure\OrdersMS.Infrastructure.csproj", "{D272AB09-BF78-4990-AC42-B2740630C55D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersMS.Application", "OrdersMS.Application\OrdersMS.Application.csproj", "{66E82BDD-B10D-41C5-B006-7DAC3B17928F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersMS.Application", "OrdersMS.Application\OrdersMS.Application.csproj", "{66E82BDD-B10D-41C5-B006-7DAC3B17928F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersMS.Domain", "OrdersMS.Domain\OrdersMS.Domain.csproj", "{6150D6A1-ED2B-4FA7-B9A6-712308DC3869}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersMS.Domain", "OrdersMS.Domain\OrdersMS.Domain.csproj", "{6150D6A1-ED2B-4FA7-B9A6-712308DC3869}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersMS.Core", "OrdersMS.Core\OrdersMS.Core.csproj", "{B90EF4E4-6C4A-44E0-8E03-7CCCB3C495FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersMS.Core", "OrdersMS.Core\OrdersMS.Core.csproj", "{B90EF4E4-6C4A-44E0-8E03-7CCCB3C495FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{6F16D3B2-8D02-431E-A5A6-1A9A699DB459}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
