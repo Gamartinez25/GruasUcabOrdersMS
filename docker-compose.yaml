@@ -14,9 +14,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DBConnectionString=Host=labs-dbservices01.ucab.edu.ve;Database=GruasUcabOrderMS;Port=5432;Username=gmartinez;Password=123456;
       - ASPNETCORE_URLS=http://+:5101;https://+:7057
-      - RabbitMQ__HostName=https://shrimp-01.rmq.cloudamqp.com
-      - RabbitMQ__UserName=pybwtysn
-      - RabbitMQ__Password=7RWjGrcK8hYn0CQlz4Uuak6MjqlRMgZg
+      - Rabbit__HostName=amqps://pybwtysn:7RWjGrcK8hYn0CQlz4Uuak6MjqlRMgZg@shrimp-01.rmq.cloudamqp.com/pybwtysn
+      - Rabbit__UserName=pybwtysn
+      - Rabbit__Password=7RWjGrcK8hYn0CQlz4Uuak6MjqlRMgZg
 
     networks:
       - mynetwork
