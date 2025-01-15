@@ -75,21 +75,23 @@ builder.Services.AddMassTransit(cfg =>
             });
         });
 
-    cfg.UsingRabbitMq((context, rabbitCfg) =>
+cfg.UsingRabbitMq((context, rabbitCfg) =>
+{
+    var rabbitConfig = builder.Configuration.GetSection("Rabbit");
+    var host = rabbitConfig["Host"];
+    var username = rabbitConfig["Username"];
+    var password = rabbitConfig["Password"];
+    rabbitCfg.Host(new Uri(host), h =>
     {
-        var rabbitConfig = builder.Configuration.GetSection("Rabbit");
-        var host = rabbitConfig["Host"];
-        var username = rabbitConfig["Username"];
-        var password = rabbitConfig["Password"];
-        rabbitCfg.Host(host, h =>
-        {
-            h.Username(username);
-            h.Password(password);
-        });
-
-        rabbitCfg.ConfigureEndpoints(context);
+        h.Username(username);
+        h.Password(password);
     });
+
+    rabbitCfg.ConfigureEndpoints(context);
 });
+
+});
+
 
 builder.Services.AddHttpClient<IMsProvidersServices, MsProvidersServices>(client =>
 {
