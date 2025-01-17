@@ -22,11 +22,11 @@ services:
       - AllowedHosts=*
       - ApiKey__Google=AIzaSyCUWtvL5DPEsyK-PeKUEiDacXwkcZG9_wQ
       - DBConnectionString=Server=labs-dbservices01.ucab.edu.ve;Database=GruasUcabOrderMS;Port=5432;User Id=gmartinez;Password=123456
-      - ServiosUrl__MsProviders=http://ec2-3-17-11-0.us-east-2.compute.amazonaws.com:5039/locations
+      - ServiosUrl__MsProviders=http://ec2-18-217-2-163.us-east-2.compute.amazonaws.com:5039/locations
       - ServiosUrl__Google=https://maps.googleapis.com/maps/api/
-      - ServiosUrl__MsUsers=http://ec2-3-145-211-144.us-east-2.compute.amazonaws.com:5163/send-notification-order
-      - ServiosUrl__MsProvidersBase=http://ec2-3-17-11-0.us-east-2.compute.amazonaws.com:5039/swagger
-      - ServiosUrl__MsUserBase=http://ec2-3-145-211-144.us-east-2.compute.amazonaws.com:5163/swagger
+      - ServiosUrl__MsUsers=http://ec2-18-191-108-174.us-east-2.compute.amazonaws.com:5163/send-notification-order
+      - ServiosUrl__MsProvidersBase=http://ec2-18-217-2-163.us-east-2.compute.amazonaws.com:5039
+      - ServiosUrl__MsUserBase=http://ec2-18-191-108-174.us-east-2.compute.amazonaws.com:5163
 
     networks:
       - mynetwork
